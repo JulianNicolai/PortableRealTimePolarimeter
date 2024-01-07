@@ -1,6 +1,7 @@
 import math
 import numpy as np
 from numpy import sin, cos
+from scipy.fft import fft
 
 
 class Calculator():
@@ -13,15 +14,32 @@ class Calculator():
         self.S2 = 0.0
         self.S3 = 0.0
 
+    def calculate_stokes_from_measurements(self, intensity_data, num_of_cycles, num_of_samples):
+
+        y = fft(intensity_data)
+
+        # All parameters must be scaled by the number of samples taken
+        # Parameters required: DC (index: 0), 2ω (index: 2*cycles), 4ω (index: 4*cycles)
+        # Due to FFT symmetry, total intensity at a frequency is actually x2, except for DC (0 Hz, already symmetric)
+        A0 = y[0] / num_of_samples
+        A1 = y[num_of_cycles * 2] * (2 / num_of_samples)
+        A2 = y[num_of_cycles * 4] * (2 / num_of_samples)
+
+        self.S1 = np.real(A2) * 4
+        self.S2 = np.imag(A2) * -4
+        self.S3 = np.imag(A1) * -2
+        self.S0 = 2 * np.real(A0) - self.S1 / 2
+
     def generate_random_polarisation(self):
-        S1 = np.random.random() * 2 - 1  # random number in range [-1, 1)
-        S2 = np.random.random() * 2 - 1
-        S3 = np.random.random() * 2 - 1
-        self.S1 = S1 / 1.73205080757  # divide by sqrt(3) to have maximum sum of square be at max 1.0
-        self.S2 = S2 / 1.73205080757
-        self.S3 = S3 / 1.73205080757
-        square_sum = np.sqrt(self.S1 ** 2 + self.S2 ** 2 + self.S3 ** 2)
-        self.S0 = np.random.random() * (1 - square_sum) + square_sum  # force S0^2 >= S1^2 + S2^2 + S3^2
+        Ex = np.random.random()
+        Ey = np.sqrt(1 - Ex**2)
+        phi = np.random.random() * 2 * np.pi
+        Ey = Ey * np.exp(1j * phi)
+
+        self.S0 = np.real(Ex * np.conj(Ex) + Ey * np.conj(Ey))
+        self.S1 = np.real(Ex * np.conj(Ex) - Ey * np.conj(Ey))
+        self.S2 = np.real(Ex * np.conj(Ey) + Ey * np.conj(Ex))
+        self.S3 = np.real(1j * (Ex * np.conj(Ey) - Ey * np.conj(Ex)))
 
     def get_stokes_params(self):
         return [self.S0, self.S1, self.S2, self.S3]
