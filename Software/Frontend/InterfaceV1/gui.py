@@ -87,6 +87,7 @@ class Interface(QtWidgets.QMainWindow):
         if 0 <= tab_index <= 2:
             S0, S1, S2, S3 = self.calc.get_stokes_params()
             DOP = self.calc.get_dop()
+            right_handed = True if S3 > 0 else False
 
             if tab_index == 0:
                 self.s0_value_xyplot.setText(f'{S0:+.5f}')
@@ -94,6 +95,10 @@ class Interface(QtWidgets.QMainWindow):
                 self.s2_value_xyplot.setText(f'{S2:+.5f}')
                 self.s3_value_xyplot.setText(f'{S3:+.5f}')
                 self.dop_value_xyplot.setText(f'{DOP * 100:.2f}%')
+                if right_handed:
+                    self.handedness_value_xyplot.setText("RIGHT")
+                else:
+                    self.handedness_value_xyplot.setText("LEFT")
 
                 x, y = self.calc.get_polarisation_ellipse_xy_data()
                 self.polarisation_ellipse_plot.setData(x, y)  # Used to update plot in realtime
