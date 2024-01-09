@@ -32,7 +32,10 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
     <property name="leftMargin">
      <number>0</number>
     </property>
@@ -45,8 +48,32 @@
     <property name="bottomMargin">
      <number>0</number>
     </property>
-    <item row="0" column="0">
+    <item>
      <widget class="QTabWidget" name="tabWidget">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>736</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>736</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Yu Gothic UI Semibold</family>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
       <property name="tabPosition">
        <enum>QTabWidget::North</enum>
       </property>
@@ -82,24 +109,44 @@
         <property name="bottomMargin">
          <number>0</number>
         </property>
+        <item row="0" column="1">
+         <widget class="PlotWidget" name="polarisation_ellipse_widget" native="true">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>451</width>
+            <height>451</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>438</width>
+            <height>438</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Yu Gothic UI Semibold</family>
+           </font>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="2">
          <widget class="QGroupBox" name="polarisation_ellipse_information">
+          <property name="font">
+           <font>
+            <family>Yu Gothic UI Semibold</family>
+           </font>
+          </property>
           <property name="title">
            <string>Information</string>
           </property>
           <layout class="QFormLayout" name="formLayout">
-           <item row="0" column="0" colspan="2">
-            <widget class="QPushButton" name="rand_stokes_button_xyplot">
-             <property name="font">
-              <font>
-               <pointsize>12</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Generate Random Polarisation State</string>
-             </property>
-            </widget>
-           </item>
            <item row="1" column="0">
             <widget class="QLabel" name="s0_label_xyplot">
              <property name="minimumSize">
@@ -110,6 +157,7 @@
              </property>
              <property name="font">
               <font>
+               <family>Yu Gothic UI Semibold</family>
                <pointsize>20</pointsize>
               </font>
              </property>
@@ -144,6 +192,7 @@
              </property>
              <property name="font">
               <font>
+               <family>Yu Gothic UI Semibold</family>
                <pointsize>20</pointsize>
               </font>
              </property>
@@ -178,6 +227,7 @@
              </property>
              <property name="font">
               <font>
+               <family>Yu Gothic UI Semibold</family>
                <pointsize>20</pointsize>
               </font>
              </property>
@@ -212,6 +262,7 @@
              </property>
              <property name="font">
               <font>
+               <family>Yu Gothic UI Semibold</family>
                <pointsize>20</pointsize>
               </font>
              </property>
@@ -252,6 +303,7 @@
              </property>
              <property name="font">
               <font>
+               <family>Yu Gothic UI Semibold</family>
                <pointsize>20</pointsize>
               </font>
              </property>
@@ -286,7 +338,7 @@
              </property>
              <property name="font">
               <font>
-               <family>MS Shell Dlg 2</family>
+               <family>Yu Gothic UI Semibold</family>
                <pointsize>20</pointsize>
               </font>
              </property>
@@ -311,29 +363,28 @@
              </property>
             </widget>
            </item>
+           <item row="0" column="0" colspan="2">
+            <widget class="QPushButton" name="rand_stokes_button_xyplot">
+             <property name="maximumSize">
+              <size>
+               <width>253</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>Yu Gothic UI Semibold</family>
+               <pointsize>12</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Random Polarisation State</string>
+             </property>
+            </widget>
+           </item>
           </layout>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="PlotWidget" name="polarisation_ellipse_widget" native="true">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>451</width>
-            <height>451</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>451</width>
-            <height>451</height>
-           </size>
-          </property>
          </widget>
         </item>
        </layout>
@@ -371,8 +422,8 @@
           </property>
           <property name="maximumSize">
            <size>
-            <width>451</width>
-            <height>451</height>
+            <width>438</width>
+            <height>438</height>
            </size>
           </property>
          </widget>
@@ -385,13 +436,19 @@
           <layout class="QFormLayout" name="formLayout_2">
            <item row="0" column="0" colspan="2">
             <widget class="QPushButton" name="rand_stokes_button_barchart">
+             <property name="maximumSize">
+              <size>
+               <width>253</width>
+               <height>16777215</height>
+              </size>
+             </property>
              <property name="font">
               <font>
                <pointsize>12</pointsize>
               </font>
              </property>
              <property name="text">
-              <string>Generate Random Polarisation State</string>
+              <string>Random Polarisation State</string>
              </property>
             </widget>
            </item>
@@ -629,13 +686,19 @@
           <layout class="QFormLayout" name="formLayout_3">
            <item row="0" column="0" colspan="2">
             <widget class="QPushButton" name="rand_stokes_button_xyzplot">
+             <property name="maximumSize">
+              <size>
+               <width>253</width>
+               <height>16777215</height>
+              </size>
+             </property>
              <property name="font">
               <font>
                <pointsize>12</pointsize>
               </font>
              </property>
              <property name="text">
-              <string>Generate Random Polarisation State</string>
+              <string>Random Polarisation State</string>
              </property>
             </widget>
            </item>
@@ -856,8 +919,8 @@
           </property>
           <property name="maximumSize">
            <size>
-            <width>451</width>
-            <height>451</height>
+            <width>438</width>
+            <height>438</height>
            </size>
           </property>
          </widget>
@@ -868,17 +931,132 @@
        <attribute name="title">
         <string>Status</string>
        </attribute>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
+         <widget class="QGroupBox" name="groupBox_3">
+          <property name="title">
+           <string>Statistics</string>
+          </property>
+          <layout class="QFormLayout" name="formLayout_5">
+           <item row="0" column="0">
+            <widget class="QLabel" name="motor_speed_status_label">
+             <property name="text">
+              <string>Motor Speed: </string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QSpinBox" name="motor_speed_status_value">
+             <property name="font">
+              <font>
+               <family>Consolas</family>
+               <pointsize>15</pointsize>
+              </font>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string> RPM</string>
+             </property>
+             <property name="maximum">
+              <number>9999</number>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QGroupBox" name="groupBox_4">
+          <property name="title">
+           <string>Log</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_6">
+           <item row="0" column="0">
+            <widget class="QTextBrowser" name="log_textbox">
+             <property name="font">
+              <font>
+               <family>Yu Gothic UI</family>
+               <pointsize>8</pointsize>
+              </font>
+             </property>
+             <property name="locale">
+              <locale language="English" country="UnitedStates"/>
+             </property>
+             <property name="documentTitle">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QFrame" name="frame_3">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>45</height>
+              </size>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <widget class="QPushButton" name="save_log_button">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>131</width>
+                <height>45</height>
+               </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>45</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Save Log</string>
+              </property>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="settings_tab">
        <attribute name="title">
         <string>Settings</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_5">
+        <property name="bottomMargin">
+         <number>9</number>
+        </property>
+        <property name="verticalSpacing">
+         <number>6</number>
+        </property>
         <item row="0" column="0">
          <widget class="QGroupBox" name="groupBox">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>370</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
-            <width>207</width>
+            <width>333</width>
             <height>16777215</height>
            </size>
           </property>
@@ -887,14 +1065,14 @@
           </property>
           <layout class="QFormLayout" name="formLayout_4">
            <item row="1" column="0">
-            <widget class="QLabel" name="label">
+            <widget class="QLabel" name="rotations_update_label">
              <property name="text">
-              <string>Motor Cycles Per Update</string>
+              <string>Rotations Per Update: </string>
              </property>
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QSpinBox" name="spinBox">
+            <widget class="QSpinBox" name="rotations_update_value">
              <property name="minimum">
               <number>1</number>
              </property>
@@ -907,14 +1085,14 @@
             </widget>
            </item>
            <item row="2" column="0">
-            <widget class="QLabel" name="label_2">
+            <widget class="QLabel" name="samples_rotation_label">
              <property name="text">
-              <string>Samples Per Cycle</string>
+              <string>Samples Per Rotation:</string>
              </property>
             </widget>
            </item>
            <item row="2" column="1">
-            <widget class="QSpinBox" name="spinBox_2">
+            <widget class="QSpinBox" name="samples_rotation_value">
              <property name="minimum">
               <number>20</number>
              </property>
@@ -927,14 +1105,14 @@
             </widget>
            </item>
            <item row="0" column="0">
-            <widget class="QLabel" name="label_3">
+            <widget class="QLabel" name="motor_speed_label">
              <property name="text">
-              <string>Motor Speed</string>
+              <string>Motor Speed:</string>
              </property>
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QSpinBox" name="spinBox_3">
+            <widget class="QSpinBox" name="motor_speed_value">
              <property name="suffix">
               <string>%</string>
              </property>
@@ -947,16 +1125,16 @@
             </widget>
            </item>
            <item row="3" column="0">
-            <widget class="QLabel" name="label_4">
+            <widget class="QLabel" name="samples_update_label">
              <property name="text">
               <string>Samples Per Update:</string>
              </property>
             </widget>
            </item>
            <item row="3" column="1">
-            <widget class="QSpinBox" name="spinBox_4">
+            <widget class="QSpinBox" name="samples_update_value">
              <property name="alignment">
-              <set>Qt::AlignCenter</set>
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
              <property name="readOnly">
               <bool>true</bool>
@@ -964,8 +1142,11 @@
              <property name="buttonSymbols">
               <enum>QAbstractSpinBox::NoButtons</enum>
              </property>
+             <property name="suffix">
+              <string/>
+             </property>
              <property name="maximum">
-              <number>999999999</number>
+              <number>999999</number>
              </property>
              <property name="value">
               <number>6400</number>
@@ -978,11 +1159,100 @@
         <item row="0" column="1">
          <widget class="QGroupBox" name="groupBox_2">
           <property name="title">
-           <string>GroupBox</string>
+           <string>Other</string>
           </property>
          </widget>
         </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QFrame" name="frame_2">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>45</height>
+           </size>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <property name="lineWidth">
+           <number>1</number>
+          </property>
+          <widget class="QPushButton" name="save_button">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>100</width>
+             <height>45</height>
+            </rect>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>20</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Save</string>
+           </property>
+          </widget>
+         </widget>
+        </item>
        </layout>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="frame">
+      <property name="minimumSize">
+       <size>
+        <width>64</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>64</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QPushButton" name="start_stop_button">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>416</y>
+         <width>64</width>
+         <height>64</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:&quot;#c94d44&quot;</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
       </widget>
      </widget>
     </item>

@@ -1,4 +1,6 @@
+import sys
 import time
+from datetime import datetime
 from typing import Union
 
 import numpy as np
@@ -6,6 +8,8 @@ import pyqtgraph
 from PyQt5 import QtWidgets, QtCore, uic, QtGui
 from pyqtgraph.widgets import PlotWidget
 from pyqtgraph import ViewBox, AxisItem, mkPen, BarGraphItem, opengl
+
+from EmittingStream import EmittingStream
 from calculate import Calculator
 from sys import platform
 
@@ -98,6 +102,30 @@ class Interface(QtWidgets.QMainWindow):
         # self.poincare_sphere_opengl_widget.addItem(hemisphere0)
         # self.poincare_sphere_opengl_widget.addItem(hemisphere1)
 
+        # # Send print output stream to log display (enable for production only!)
+        # stream_out = EmittingStream()
+        # stream_out.statement.connect(self.output_stream_to_log)
+        # sys.stdout = stream_out
+
+        # stream_err = EmittingStream()
+        # stream_err.statement.connect(self.error_stream_to_log)
+        # sys.stderr = stream_err
+
+        self.start_stop_button.clicked.connect(self.system_control)
+
+        print("System initialized. Ready to begin measurement.")
+
+    def system_control(self):
+        print("System started!")
+
+    def output_stream_to_log(self, statement):
+        timestamp = datetime.now().strftime("%y-%m-%d %H:%M:%S")
+        self.log_textbox.append(f"<span>[{timestamp}] {statement}</span>")
+
+    def error_stream_to_log(self, statement):
+        timestamp = datetime.now().strftime("%y-%m-%d %H:%M:%S")
+        self.log_textbox.append(f"<span style='color:red'>[{timestamp}] {statement}</span>")
+
     def generate_random_polarisation(self):
         self.calc.generate_random_polarisation()
         self.update_plots()
@@ -173,3 +201,8 @@ class Interface(QtWidgets.QMainWindow):
         bottom_axis.setLabel(text=bottom_text, units=bottom_units, **label_style)
         bottom_axis.enableAutoSIPrefix(False)
         widget.setAxisItems(axisItems={'left': left_axis, 'bottom': bottom_axis})
+
+    def __del__(self):
+        # Restore sys.stdout
+        sys.stdout = sys.__stdout__
+        sys.stderr = sys.__stderr__

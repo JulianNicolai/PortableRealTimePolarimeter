@@ -40,6 +40,8 @@ class Calculator:
         self.S2 = np.real(Ex * np.conj(Ey) + Ey * np.conj(Ex))
         self.S3 = np.real(1j * (Ex * np.conj(Ey) - Ey * np.conj(Ex)))
 
+        print("New random state generated.")
+
     def get_stokes_params(self):
         return [self.S0, self.S1, self.S2, self.S3]
 
