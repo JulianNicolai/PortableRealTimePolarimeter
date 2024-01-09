@@ -54,7 +54,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -307,7 +307,7 @@
               </font>
              </property>
              <property name="text">
-              <string>Right</string>
+              <string>RIGHT</string>
              </property>
             </widget>
            </item>
@@ -397,13 +397,22 @@
            </item>
            <item row="1" column="0">
             <widget class="QLabel" name="s0_label_barchart">
+             <property name="minimumSize">
+              <size>
+               <width>110</width>
+               <height>0</height>
+              </size>
+             </property>
              <property name="font">
               <font>
                <pointsize>20</pointsize>
               </font>
              </property>
              <property name="text">
-              <string>S0:</string>
+              <string>S0: </string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
@@ -422,13 +431,22 @@
            </item>
            <item row="2" column="0">
             <widget class="QLabel" name="s1_label_barchart">
+             <property name="minimumSize">
+              <size>
+               <width>110</width>
+               <height>0</height>
+              </size>
+             </property>
              <property name="font">
               <font>
                <pointsize>20</pointsize>
               </font>
              </property>
              <property name="text">
-              <string>S1:</string>
+              <string>S1: </string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
@@ -447,13 +465,22 @@
            </item>
            <item row="3" column="0">
             <widget class="QLabel" name="s2_label_barchart">
+             <property name="minimumSize">
+              <size>
+               <width>110</width>
+               <height>0</height>
+              </size>
+             </property>
              <property name="font">
               <font>
                <pointsize>20</pointsize>
               </font>
              </property>
              <property name="text">
-              <string>S2:</string>
+              <string>S2: </string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
@@ -472,13 +499,22 @@
            </item>
            <item row="4" column="0">
             <widget class="QLabel" name="s3_label_barchart">
+             <property name="minimumSize">
+              <size>
+               <width>110</width>
+               <height>0</height>
+              </size>
+             </property>
              <property name="font">
               <font>
                <pointsize>20</pointsize>
               </font>
              </property>
              <property name="text">
-              <string>S3:</string>
+              <string>S3: </string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
@@ -497,13 +533,22 @@
            </item>
            <item row="5" column="0">
             <widget class="QLabel" name="dop_label_barchart">
+             <property name="minimumSize">
+              <size>
+               <width>110</width>
+               <height>0</height>
+              </size>
+             </property>
              <property name="font">
               <font>
                <pointsize>20</pointsize>
               </font>
              </property>
              <property name="text">
-              <string>DOP:</string>
+              <string>DOP: </string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
@@ -517,6 +562,40 @@
              </property>
              <property name="text">
               <string>0.00%</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0">
+            <widget class="QLabel" name="handedness_label_barchart">
+             <property name="minimumSize">
+              <size>
+               <width>110</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>20</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Handed: </string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="1">
+            <widget class="QLabel" name="handedness_value_barchart">
+             <property name="font">
+              <font>
+               <family>Consolas</family>
+               <pointsize>20</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>RIGHT</string>
              </property>
             </widget>
            </item>
@@ -562,13 +641,22 @@
            </item>
            <item row="1" column="0">
             <widget class="QLabel" name="s0_label_xyzplot">
+             <property name="minimumSize">
+              <size>
+               <width>110</width>
+               <height>0</height>
+              </size>
+             </property>
              <property name="font">
               <font>
                <pointsize>20</pointsize>
               </font>
              </property>
              <property name="text">
-              <string>S0:</string>
+              <string>S0: </string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
@@ -587,13 +675,22 @@
            </item>
            <item row="2" column="0">
             <widget class="QLabel" name="s1_label_xyzplot">
+             <property name="minimumSize">
+              <size>
+               <width>110</width>
+               <height>0</height>
+              </size>
+             </property>
              <property name="font">
               <font>
                <pointsize>20</pointsize>
               </font>
              </property>
              <property name="text">
-              <string>S1:</string>
+              <string>S1: </string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
@@ -612,13 +709,22 @@
            </item>
            <item row="3" column="0">
             <widget class="QLabel" name="s2_label_xyzplot">
+             <property name="minimumSize">
+              <size>
+               <width>110</width>
+               <height>0</height>
+              </size>
+             </property>
              <property name="font">
               <font>
                <pointsize>20</pointsize>
               </font>
              </property>
              <property name="text">
-              <string>S2:</string>
+              <string>S2: </string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
@@ -637,13 +743,22 @@
            </item>
            <item row="4" column="0">
             <widget class="QLabel" name="s3_label_xyzplot">
+             <property name="minimumSize">
+              <size>
+               <width>110</width>
+               <height>0</height>
+              </size>
+             </property>
              <property name="font">
               <font>
                <pointsize>20</pointsize>
               </font>
              </property>
              <property name="text">
-              <string>S3:</string>
+              <string>S3: </string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
@@ -662,13 +777,22 @@
            </item>
            <item row="5" column="0">
             <widget class="QLabel" name="dop_label_xyzplot">
+             <property name="minimumSize">
+              <size>
+               <width>110</width>
+               <height>0</height>
+              </size>
+             </property>
              <property name="font">
               <font>
                <pointsize>20</pointsize>
               </font>
              </property>
              <property name="text">
-              <string>DOP:</string>
+              <string>DOP: </string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
@@ -682,6 +806,40 @@
              </property>
              <property name="text">
               <string>0.00%</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0">
+            <widget class="QLabel" name="handedness_label_xyzplot">
+             <property name="minimumSize">
+              <size>
+               <width>110</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>20</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Handed: </string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="1">
+            <widget class="QLabel" name="handedness_value_xyzplot">
+             <property name="font">
+              <font>
+               <family>Consolas</family>
+               <pointsize>20</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>RIGHT</string>
              </property>
             </widget>
            </item>

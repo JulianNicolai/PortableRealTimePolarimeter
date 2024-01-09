@@ -1,8 +1,9 @@
 import time
 from typing import Union
 
+import numpy as np
 import pyqtgraph
-from PyQt5 import QtWidgets, QtCore, uic
+from PyQt5 import QtWidgets, QtCore, uic, QtGui
 from pyqtgraph.widgets import PlotWidget
 from pyqtgraph import ViewBox, AxisItem, mkPen, BarGraphItem, opengl
 from calculate import Calculator
@@ -71,11 +72,31 @@ class Interface(QtWidgets.QMainWindow):
         # axis = opengl.GLAxisItem()
         # self.poincare_sphere_opengl_widget.addItem(axis)
         grid = opengl.GLGridItem()
+        grid.setSize(5, 5, 5)
         grid.setColor("#00000040")
         self.poincare_sphere_opengl_widget.addItem(grid)
-
         self.poincare_sphere_opengl_widget.setBackgroundColor('w')
 
+        # # Attempt to draw poincare sphere manually
+        # RADIUS = 1
+        # x_sphere_data = np.linspace(-RADIUS, RADIUS, 256)
+        # y_sphere_data = x_sphere_data
+        # z_sphere_data = np.zeros((256, 256))
+        #
+        # i = 0
+        # for x in x_sphere_data:
+        #     j = 0
+        #     for y in y_sphere_data:
+        #         z_sphere_data[i, j] = np.sqrt(RADIUS ** 2 - x ** 2 - y ** 2)
+        #         j += 1
+        #     i += 1
+        #
+        # z_sphere_data_neg = -z_sphere_data
+        # colors = (1,1,256)
+        # hemisphere0 = opengl.GLSurfacePlotItem(x_sphere_data, y_sphere_data, z_sphere_data, smooth=False, colors=colors)
+        # hemisphere1 = opengl.GLSurfacePlotItem(x_sphere_data, y_sphere_data, z_sphere_data_neg, smooth=False, colors=colors)
+        # self.poincare_sphere_opengl_widget.addItem(hemisphere0)
+        # self.poincare_sphere_opengl_widget.addItem(hemisphere1)
 
     def generate_random_polarisation(self):
         self.calc.generate_random_polarisation()
@@ -109,10 +130,10 @@ class Interface(QtWidgets.QMainWindow):
                 self.s2_value_barchart.setText(f'{S2:+.5f}')
                 self.s3_value_barchart.setText(f'{S3:+.5f}')
                 self.dop_value_barchart.setText(f'{DOP * 100:.2f}%')
-                # if right_handed:
-                #     self.handedness_value_xyplot.setText("RIGHT")
-                # else:
-                #     self.handedness_value_xyplot.setText("LEFT")
+                if right_handed:
+                    self.handedness_value_barchart.setText("RIGHT")
+                else:
+                    self.handedness_value_barchart.setText("LEFT")
 
                 stokes_y = self.calc.get_stokes_params()
                 self.stokes_bar_graph.setOpts(height=stokes_y)  # Used to update bar graph in realtime
@@ -123,10 +144,10 @@ class Interface(QtWidgets.QMainWindow):
                 self.s2_value_xyzplot.setText(f'{S2:+.5f}')
                 self.s3_value_xyzplot.setText(f'{S3:+.5f}')
                 self.dop_value_xyzplot.setText(f'{DOP * 100:.2f}%')
-                # if right_handed:
-                #     self.handedness_value_xyplot.setText("RIGHT")
-                # else:
-                #     self.handedness_value_xyplot.setText("LEFT")
+                if right_handed:
+                    self.handedness_value_xyzplot.setText("RIGHT")
+                else:
+                    self.handedness_value_xyzplot.setText("LEFT")
 
     @staticmethod
     def set_widget_titles(
