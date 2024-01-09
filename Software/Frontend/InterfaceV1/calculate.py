@@ -4,11 +4,10 @@ from numpy import sin, cos
 from scipy.fft import fft
 
 
-class Calculator():
+class Calculator:
 
     def __init__(self, num_points):
-        self.num_points = num_points
-        self.t = np.linspace(0, 2 * np.pi, self.num_points)
+        self.t = np.linspace(0, 2 * np.pi, num_points)
         self.S0 = 0.0
         self.S1 = 0.0
         self.S2 = 0.0
@@ -48,14 +47,16 @@ class Calculator():
         return np.sqrt(self.S1 ** 2 + self.S2 ** 2 + self.S3 ** 2) / self.S0
 
     def get_polarisation_ellipse_params(self):
-        psi = math.atan(self.S2 / self.S1) / 2
+        K = 0 if self.S1 >= 0 else np.pi / 2
+        psi = math.atan(self.S2 / self.S1) / 2 - K
         chi = math.asin(self.S3 / self.S0) / 2
-        return (psi, chi)
+        return psi, chi
 
     def get_poincare_sphere_params(self):
-        phi = math.atan(self.S2 / self.S1)
-        theta = math.acos(self.S3 / self.S0)
-        return (phi, theta)
+        phi, theta = self.get_polarisation_ellipse_params()
+        phi *= 2
+        theta *= 2
+        return phi, theta
 
     def get_polarisation_ellipse_xy_data(self):
 
@@ -67,6 +68,4 @@ class Calculator():
         x_t = np.sqrt(self.S0) * (cos(chi) * cos(psi) * sin_t - sin(chi) * sin(psi) * cos_t)
         y_t = np.sqrt(self.S0) * (cos(chi) * sin(psi) * sin_t + sin(chi) * cos(psi) * cos_t)
 
-        return (x_t, y_t)
-
-
+        return x_t, y_t

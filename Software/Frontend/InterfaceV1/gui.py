@@ -109,6 +109,10 @@ class Interface(QtWidgets.QMainWindow):
                 self.s2_value_barchart.setText(f'{S2:+.5f}')
                 self.s3_value_barchart.setText(f'{S3:+.5f}')
                 self.dop_value_barchart.setText(f'{DOP * 100:.2f}%')
+                # if right_handed:
+                #     self.handedness_value_xyplot.setText("RIGHT")
+                # else:
+                #     self.handedness_value_xyplot.setText("LEFT")
 
                 stokes_y = self.calc.get_stokes_params()
                 self.stokes_bar_graph.setOpts(height=stokes_y)  # Used to update bar graph in realtime
@@ -119,6 +123,10 @@ class Interface(QtWidgets.QMainWindow):
                 self.s2_value_xyzplot.setText(f'{S2:+.5f}')
                 self.s3_value_xyzplot.setText(f'{S3:+.5f}')
                 self.dop_value_xyzplot.setText(f'{DOP * 100:.2f}%')
+                # if right_handed:
+                #     self.handedness_value_xyplot.setText("RIGHT")
+                # else:
+                #     self.handedness_value_xyplot.setText("LEFT")
 
     @staticmethod
     def set_widget_titles(
