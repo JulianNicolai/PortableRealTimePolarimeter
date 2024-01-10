@@ -29,4 +29,4 @@ class MotorClock:
 # Usage
 if __name__ == "__main__":
     hall_sensor = MotorClock(23)
-    MotorClock.run()
+    hall_sensor.run()

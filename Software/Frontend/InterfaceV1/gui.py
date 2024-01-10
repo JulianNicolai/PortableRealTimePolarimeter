@@ -116,7 +116,10 @@ class Interface(QtWidgets.QMainWindow):
         print("System initialized. Ready to begin measurement.")
 
     def system_control(self):
-        print("System started!")
+        if self.start_stop_button.isChecked():
+            print("System started!")
+        else:
+            print("System stopped!")
 
     def output_stream_to_log(self, statement):
         timestamp = datetime.now().strftime("%y-%m-%d %H:%M:%S")

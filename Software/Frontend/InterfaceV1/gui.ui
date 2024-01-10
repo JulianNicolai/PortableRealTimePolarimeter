@@ -1242,16 +1242,13 @@
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color:&quot;#c94d44&quot;</string>
+        <string notr="true">QPushButton{background-color: rgb(255, 60, 60);border:none;}QPushButton:checked{background-color: rgb(60,255,60);border: none;}</string>
        </property>
        <property name="text">
         <string/>
        </property>
        <property name="checkable">
         <bool>true</bool>
-       </property>
-       <property name="flat">
-        <bool>false</bool>
        </property>
       </widget>
      </widget>
