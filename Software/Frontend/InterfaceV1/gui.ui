@@ -144,9 +144,12 @@
            </font>
           </property>
           <property name="title">
-           <string>Information</string>
+           <string>Polarisation Parameters</string>
           </property>
           <layout class="QFormLayout" name="formLayout">
+           <property name="topMargin">
+            <number>0</number>
+           </property>
            <item row="1" column="0">
             <widget class="QLabel" name="s0_label_xyplot">
              <property name="minimumSize">
@@ -363,7 +366,7 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="0" colspan="2">
+           <item row="7" column="0" colspan="2">
             <widget class="QPushButton" name="rand_stokes_button_xyplot">
              <property name="maximumSize">
               <size>
@@ -431,27 +434,12 @@
         <item row="0" column="1">
          <widget class="QGroupBox" name="stokes_parameters_information">
           <property name="title">
-           <string>Information</string>
+           <string>Polarisation Parameters</string>
           </property>
           <layout class="QFormLayout" name="formLayout_2">
-           <item row="0" column="0" colspan="2">
-            <widget class="QPushButton" name="rand_stokes_button_barchart">
-             <property name="maximumSize">
-              <size>
-               <width>253</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>12</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Random Polarisation State</string>
-             </property>
-            </widget>
-           </item>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
            <item row="1" column="0">
             <widget class="QLabel" name="s0_label_barchart">
              <property name="minimumSize">
@@ -656,6 +644,24 @@
              </property>
             </widget>
            </item>
+           <item row="7" column="0" colspan="2">
+            <widget class="QPushButton" name="rand_stokes_button_barchart">
+             <property name="maximumSize">
+              <size>
+               <width>253</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Random Polarisation State</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </widget>
         </item>
@@ -680,28 +686,19 @@
         </property>
         <item row="0" column="1">
          <widget class="QGroupBox" name="poincare_sphere_information">
+          <property name="maximumSize">
+           <size>
+            <width>300</width>
+            <height>16777215</height>
+           </size>
+          </property>
           <property name="title">
-           <string>Information</string>
+           <string>Polarisation Parameters</string>
           </property>
           <layout class="QFormLayout" name="formLayout_3">
-           <item row="0" column="0" colspan="2">
-            <widget class="QPushButton" name="rand_stokes_button_xyzplot">
-             <property name="maximumSize">
-              <size>
-               <width>253</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>12</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Random Polarisation State</string>
-             </property>
-            </widget>
-           </item>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
            <item row="1" column="0">
             <widget class="QLabel" name="s0_label_xyzplot">
              <property name="minimumSize">
@@ -906,21 +903,33 @@
              </property>
             </widget>
            </item>
+           <item row="7" column="0" colspan="2">
+            <widget class="QPushButton" name="rand_stokes_button_xyzplot">
+             <property name="maximumSize">
+              <size>
+               <width>253</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Random Polarisation State</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </widget>
         </item>
         <item row="0" column="0">
-         <widget class="GLViewWidget" name="poincare_sphere_opengl_widget">
+         <widget class="MplWidget" name="poincare_sphere_widget" native="true">
           <property name="minimumSize">
            <size>
             <width>451</width>
-            <height>451</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>438</width>
-            <height>438</height>
+            <height>439</height>
            </size>
           </property>
          </widget>
@@ -1241,14 +1250,44 @@
          <height>64</height>
         </rect>
        </property>
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
        <property name="styleSheet">
-        <string notr="true">QPushButton{background-color: rgb(255, 60, 60);border:none;}QPushButton:checked{background-color: rgb(60,255,60);border: none;}</string>
+        <string notr="true">QPushButton:disabled:checked{
+background-color: #e0a546;
+border: none;
+}
+QPushButton{
+background-color: #d14545;
+border: none;
+}
+QPushButton:checked{
+background-color: #45d14e;
+border: none;
+}</string>
        </property>
        <property name="text">
         <string/>
        </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>icon.png</normaloff>icon.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>48</width>
+         <height>48</height>
+        </size>
+       </property>
        <property name="checkable">
         <bool>true</bool>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
        </property>
       </widget>
      </widget>
@@ -1264,9 +1303,10 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>GLViewWidget</class>
-   <extends>QOpenGLWidget</extends>
-   <header>pyqtgraph.opengl</header>
+   <class>MplWidget</class>
+   <extends>QWidget</extends>
+   <header>mplwidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -2,24 +2,23 @@ import sys
 import time
 from datetime import datetime
 from typing import Union
-
 import numpy as np
-import pyqtgraph
-from PyQt5 import QtWidgets, QtCore, uic, QtGui
+from PyQt5 import QtWidgets, QtCore, uic
+from PyQt5.QtCore import QTimer
 from pyqtgraph.widgets import PlotWidget
-from pyqtgraph import ViewBox, AxisItem, mkPen, BarGraphItem, opengl
-
+from pyqtgraph import ViewBox, AxisItem, mkPen, BarGraphItem
 from EmittingStream import EmittingStream
-from calculate import Calculator
+from PolarisationCalculation import Calculator
 from sys import platform
-
+import qutip
 
 class Interface(QtWidgets.QMainWindow):
 
     path_linux = "/home/polarimeter/Documents/PortableRealTimePolarimeter/Software/Frontend/InterfaceV1/gui.ui"
     path_windows = "gui.ui"
     linux_flag = False
-    def __init__(self):
+
+    def __init__(self, in_production_flag: bool):
         super(Interface, self).__init__()  # Call the inherited classes __init__ method
         if platform == "win32":
             path = self.path_windows
@@ -33,6 +32,18 @@ class Interface(QtWidgets.QMainWindow):
         self.move(0, 0)  # Move frame to top left of screen
         if self.linux_flag:
             self.showMaximized()
+
+        self.IN_PRODUCTION = in_production_flag
+
+        if self.IN_PRODUCTION:
+            # Send print output stream to log display (enable for production only!)
+            stream_out = EmittingStream()
+            stream_out.statement.connect(self.output_stream_to_log)
+            sys.stdout = stream_out
+
+            stream_err = EmittingStream()
+            stream_err.statement.connect(self.error_stream_to_log)
+            sys.stderr = stream_err
 
         self.rand_stokes_button_xyplot.clicked.connect(self.generate_random_polarisation)
         self.rand_stokes_button_barchart.clicked.connect(self.generate_random_polarisation)
@@ -73,43 +84,13 @@ class Interface(QtWidgets.QMainWindow):
         self.stokes_bar_graph = BarGraphItem(x=stokes_x, height=stokes_y, width=0.8, brush='r')
         self.stokes_parameters_widget.addItem(self.stokes_bar_graph)
 
-        # axis = opengl.GLAxisItem()
-        # self.poincare_sphere_opengl_widget.addItem(axis)
-        grid = opengl.GLGridItem()
-        grid.setSize(5, 5, 5)
-        grid.setColor("#00000040")
-        self.poincare_sphere_opengl_widget.addItem(grid)
-        self.poincare_sphere_opengl_widget.setBackgroundColor('w')
 
-        # # Attempt to draw poincare sphere manually
-        # RADIUS = 1
-        # x_sphere_data = np.linspace(-RADIUS, RADIUS, 256)
-        # y_sphere_data = x_sphere_data
-        # z_sphere_data = np.zeros((256, 256))
-        #
-        # i = 0
-        # for x in x_sphere_data:
-        #     j = 0
-        #     for y in y_sphere_data:
-        #         z_sphere_data[i, j] = np.sqrt(RADIUS ** 2 - x ** 2 - y ** 2)
-        #         j += 1
-        #     i += 1
-        #
-        # z_sphere_data_neg = -z_sphere_data
-        # colors = (1,1,256)
-        # hemisphere0 = opengl.GLSurfacePlotItem(x_sphere_data, y_sphere_data, z_sphere_data, smooth=False, colors=colors)
-        # hemisphere1 = opengl.GLSurfacePlotItem(x_sphere_data, y_sphere_data, z_sphere_data_neg, smooth=False, colors=colors)
-        # self.poincare_sphere_opengl_widget.addItem(hemisphere0)
-        # self.poincare_sphere_opengl_widget.addItem(hemisphere1)
+        # x = range(0, 10)
+        # y = range(0, 20, 2)
+        # self.poincare_sphere_widget.canvas.ax.plot(x, y)
+        # # refresh canvas
+        # self.poincare_sphere_widgetax.canvas.draw()
 
-        # # Send print output stream to log display (enable for production only!)
-        # stream_out = EmittingStream()
-        # stream_out.statement.connect(self.output_stream_to_log)
-        # sys.stdout = stream_out
-
-        # stream_err = EmittingStream()
-        # stream_err.statement.connect(self.error_stream_to_log)
-        # sys.stderr = stream_err
 
         self.start_stop_button.clicked.connect(self.system_control)
 
@@ -117,6 +98,8 @@ class Interface(QtWidgets.QMainWindow):
 
     def system_control(self):
         if self.start_stop_button.isChecked():
+            self.start_stop_button.setEnabled(False)
+            QTimer.singleShot(1000, lambda: self.start_stop_button.setDisabled(False))
             print("System started!")
         else:
             print("System stopped!")
@@ -141,44 +124,48 @@ class Interface(QtWidgets.QMainWindow):
             DOP = self.calc.get_dop()
             right_handed = True if S3 > 0 else False
 
+            S0_value_str = f'{S0:+.5f}'
+            S1_value_str = f'{S1:+.5f}'
+            S2_value_str = f'{S2:+.5f}'
+            S3_value_str = f'{S3:+.5f}'
+            DOP_value_str = f'{DOP * 100:.2f}%'
+            handed_value_str = "RIGHT" if right_handed else "LEFT"
+
             if tab_index == 0:
-                self.s0_value_xyplot.setText(f'{S0:+.5f}')
-                self.s1_value_xyplot.setText(f'{S1:+.5f}')
-                self.s2_value_xyplot.setText(f'{S2:+.5f}')
-                self.s3_value_xyplot.setText(f'{S3:+.5f}')
-                self.dop_value_xyplot.setText(f'{DOP * 100:.2f}%')
-                if right_handed:
-                    self.handedness_value_xyplot.setText("RIGHT")
-                else:
-                    self.handedness_value_xyplot.setText("LEFT")
+                self.s0_value_xyplot.setText(S0_value_str)
+                self.s1_value_xyplot.setText(S1_value_str)
+                self.s2_value_xyplot.setText(S2_value_str)
+                self.s3_value_xyplot.setText(S3_value_str)
+                self.dop_value_xyplot.setText(DOP_value_str)
+                self.handedness_value_xyplot.setText(handed_value_str)
 
                 x, y = self.calc.get_polarisation_ellipse_xy_data()
                 self.polarisation_ellipse_plot.setData(x, y)  # Used to update plot in realtime
 
             elif tab_index == 1:
-                self.s0_value_barchart.setText(f'{S0:+.5f}')
-                self.s1_value_barchart.setText(f'{S1:+.5f}')
-                self.s2_value_barchart.setText(f'{S2:+.5f}')
-                self.s3_value_barchart.setText(f'{S3:+.5f}')
-                self.dop_value_barchart.setText(f'{DOP * 100:.2f}%')
-                if right_handed:
-                    self.handedness_value_barchart.setText("RIGHT")
-                else:
-                    self.handedness_value_barchart.setText("LEFT")
+                self.s0_value_barchart.setText(S0_value_str)
+                self.s1_value_barchart.setText(S1_value_str)
+                self.s2_value_barchart.setText(S2_value_str)
+                self.s3_value_barchart.setText(S3_value_str)
+                self.dop_value_barchart.setText(DOP_value_str)
+                self.handedness_value_barchart.setText(handed_value_str)
 
                 stokes_y = self.calc.get_stokes_params()
                 self.stokes_bar_graph.setOpts(height=stokes_y)  # Used to update bar graph in realtime
 
             else:
-                self.s0_value_xyzplot.setText(f'{S0:+.5f}')
-                self.s1_value_xyzplot.setText(f'{S1:+.5f}')
-                self.s2_value_xyzplot.setText(f'{S2:+.5f}')
-                self.s3_value_xyzplot.setText(f'{S3:+.5f}')
-                self.dop_value_xyzplot.setText(f'{DOP * 100:.2f}%')
-                if right_handed:
-                    self.handedness_value_xyzplot.setText("RIGHT")
-                else:
-                    self.handedness_value_xyzplot.setText("LEFT")
+                self.s0_value_xyzplot.setText(S0_value_str)
+                self.s1_value_xyzplot.setText(S1_value_str)
+                self.s2_value_xyzplot.setText(S2_value_str)
+                self.s3_value_xyzplot.setText(S3_value_str)
+                self.dop_value_xyzplot.setText(DOP_value_str)
+                self.handedness_value_xyzplot.setText(handed_value_str)
+
+                x = range(0, 10)
+                y = np.random.rand(10)
+                self.poincare_sphere_widget.canvas.ax.clear()
+                self.poincare_sphere_widget.canvas.ax.plot(x, y)
+                self.poincare_sphere_widget.canvas.draw()
 
     @staticmethod
     def set_widget_titles(
@@ -209,3 +196,34 @@ class Interface(QtWidgets.QMainWindow):
         # Restore sys.stdout
         sys.stdout = sys.__stdout__
         sys.stderr = sys.__stderr__
+
+
+# OLD CODE FOR POINCARE SPHERE:
+# axis = opengl.GLAxisItem()
+# self.poincare_sphere_opengl_widget.addItem(axis)
+# grid = opengl.GLGridItem()
+# grid.setSize(5, 5, 5)
+# grid.setColor("#00000040")
+# self.poincare_sphere_opengl_widget.addItem(grid)
+# self.poincare_sphere_opengl_widget.setBackgroundColor('w')
+
+# # Attempt to draw poincare sphere manually
+# RADIUS = 1
+# x_sphere_data = np.linspace(-RADIUS, RADIUS, 256)
+# y_sphere_data = x_sphere_data
+# z_sphere_data = np.zeros((256, 256))
+#
+# i = 0
+# for x in x_sphere_data:
+#     j = 0
+#     for y in y_sphere_data:
+#         z_sphere_data[i, j] = np.sqrt(RADIUS ** 2 - x ** 2 - y ** 2)
+#         j += 1
+#     i += 1
+#
+# z_sphere_data_neg = -z_sphere_data
+# colors = (1,1,256)
+# hemisphere0 = opengl.GLSurfacePlotItem(x_sphere_data, y_sphere_data, z_sphere_data, smooth=False, colors=colors)
+# hemisphere1 = opengl.GLSurfacePlotItem(x_sphere_data, y_sphere_data, z_sphere_data_neg, smooth=False, colors=colors)
+# self.poincare_sphere_opengl_widget.addItem(hemisphere0)
+# self.poincare_sphere_opengl_widget.addItem(hemisphere1)

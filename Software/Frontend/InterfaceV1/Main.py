@@ -1,13 +1,15 @@
 import sys
 from PyQt5 import QtWidgets
-from gui import Interface
+from Interface import Interface
 
 
 class Main:
 
+    IN_PRODUCTION = False
+
     def __init__(self, argv):
         app = QtWidgets.QApplication(argv)
-        window = Interface()
+        window = Interface(self.IN_PRODUCTION)
         window.show()
         sys.exit(app.exec_())
 
