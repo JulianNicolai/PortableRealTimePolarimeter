@@ -70,8 +70,8 @@
       </property>
       <property name="font">
        <font>
-        <family>Yu Gothic UI Semibold</family>
-        <pointsize>15</pointsize>
+        <family>MS Shell Dlg 2</family>
+        <pointsize>8</pointsize>
        </font>
       </property>
       <property name="tabPosition">
@@ -140,7 +140,9 @@
          <widget class="QGroupBox" name="polarisation_ellipse_information">
           <property name="font">
            <font>
-            <family>Yu Gothic UI Semibold</family>
+            <family>MS Shell Dlg 2</family>
+            <weight>50</weight>
+            <bold>false</bold>
            </font>
           </property>
           <property name="title">
@@ -160,7 +162,7 @@
              </property>
              <property name="font">
               <font>
-               <family>Yu Gothic UI Semibold</family>
+               <family>MS Shell Dlg 2</family>
                <pointsize>20</pointsize>
               </font>
              </property>
@@ -195,7 +197,7 @@
              </property>
              <property name="font">
               <font>
-               <family>Yu Gothic UI Semibold</family>
+               <family>MS Shell Dlg 2</family>
                <pointsize>20</pointsize>
               </font>
              </property>
@@ -230,7 +232,7 @@
              </property>
              <property name="font">
               <font>
-               <family>Yu Gothic UI Semibold</family>
+               <family>MS Shell Dlg 2</family>
                <pointsize>20</pointsize>
               </font>
              </property>
@@ -265,7 +267,7 @@
              </property>
              <property name="font">
               <font>
-               <family>Yu Gothic UI Semibold</family>
+               <family>MS Shell Dlg 2</family>
                <pointsize>20</pointsize>
               </font>
              </property>
@@ -306,7 +308,7 @@
              </property>
              <property name="font">
               <font>
-               <family>Yu Gothic UI Semibold</family>
+               <family>MS Shell Dlg 2</family>
                <pointsize>20</pointsize>
               </font>
              </property>
@@ -341,7 +343,7 @@
              </property>
              <property name="font">
               <font>
-               <family>Yu Gothic UI Semibold</family>
+               <family>MS Shell Dlg 2</family>
                <pointsize>20</pointsize>
               </font>
              </property>
@@ -376,10 +378,10 @@
              </property>
              <property name="font">
               <font>
-               <family>Yu Gothic UI Semibold</family>
+               <family>MS Shell Dlg 2</family>
                <pointsize>12</pointsize>
-               <weight>75</weight>
-               <bold>true</bold>
+               <weight>50</weight>
+               <bold>false</bold>
               </font>
              </property>
              <property name="text">
@@ -409,28 +411,6 @@
         <property name="bottomMargin">
          <number>0</number>
         </property>
-        <item row="0" column="0">
-         <widget class="PlotWidget" name="stokes_parameters_widget" native="true">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>451</width>
-            <height>451</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>438</width>
-            <height>438</height>
-           </size>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="1">
          <widget class="QGroupBox" name="stokes_parameters_information">
           <property name="title">
@@ -665,6 +645,28 @@
           </layout>
          </widget>
         </item>
+        <item row="0" column="0">
+         <widget class="PlotWidget" name="stokes_parameters_widget" native="true">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>451</width>
+            <height>451</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>438</width>
+            <height>438</height>
+           </size>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="poincare_sphere">
@@ -700,7 +702,7 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="2">
+        <item row="0" column="1">
          <widget class="QGroupBox" name="poincare_sphere_information">
           <property name="minimumSize">
            <size>
@@ -946,9 +948,6 @@
           </layout>
          </widget>
         </item>
-        <item row="0" column="1">
-         <widget class="QWidget" name="widget" native="true"/>
-        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="status_tab">
@@ -974,7 +973,7 @@
              <property name="font">
               <font>
                <family>Consolas</family>
-               <pointsize>15</pointsize>
+               <pointsize>8</pointsize>
               </font>
              </property>
              <property name="alignment">
@@ -1038,7 +1037,7 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>131</width>
+                <width>141</width>
                 <height>45</height>
                </rect>
               </property>
@@ -1047,6 +1046,14 @@
                 <width>0</width>
                 <height>45</height>
                </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>MS Shell Dlg 2</family>
+                <pointsize>20</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
               </property>
               <property name="text">
                <string>Save Log</string>
@@ -1075,12 +1082,12 @@
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>370</height>
+            <height>270</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>333</width>
+            <width>270</width>
             <height>16777215</height>
            </size>
           </property>
@@ -1088,14 +1095,14 @@
            <string>Measurement</string>
           </property>
           <layout class="QFormLayout" name="formLayout_4">
-           <item row="1" column="0">
+           <item row="3" column="0">
             <widget class="QLabel" name="rotations_update_label">
              <property name="text">
               <string>Rotations Per Update: </string>
              </property>
             </widget>
            </item>
-           <item row="1" column="1">
+           <item row="3" column="1">
             <widget class="QSpinBox" name="rotations_update_value">
              <property name="minimum">
               <number>1</number>
@@ -1108,14 +1115,14 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="0">
+           <item row="4" column="0">
             <widget class="QLabel" name="samples_rotation_label">
              <property name="text">
               <string>Samples Per Rotation:</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="1">
+           <item row="4" column="1">
             <widget class="QSpinBox" name="samples_rotation_value">
              <property name="minimum">
               <number>20</number>
@@ -1135,28 +1142,21 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="1">
-            <widget class="QSpinBox" name="motor_speed_value">
-             <property name="suffix">
-              <string>%</string>
-             </property>
-             <property name="minimum">
-              <number>10</number>
-             </property>
-             <property name="maximum">
-              <number>100</number>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
+           <item row="5" column="0">
             <widget class="QLabel" name="samples_update_label">
              <property name="text">
               <string>Samples Per Update:</string>
              </property>
             </widget>
            </item>
-           <item row="3" column="1">
+           <item row="5" column="1">
             <widget class="QSpinBox" name="samples_update_value">
+             <property name="font">
+              <font>
+               <family>Consolas</family>
+               <pointsize>8</pointsize>
+              </font>
+             </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
@@ -1174,6 +1174,47 @@
              </property>
              <property name="value">
               <number>6400</number>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QSpinBox" name="motor_speed_value">
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string>%</string>
+             </property>
+             <property name="minimum">
+              <number>1</number>
+             </property>
+             <property name="maximum">
+              <number>100</number>
+             </property>
+             <property name="value">
+              <number>95</number>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QSlider" name="horizontalSlider">
+             <property name="minimum">
+              <number>1</number>
+             </property>
+             <property name="maximum">
+              <number>100</number>
+             </property>
+             <property name="value">
+              <number>95</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
              </property>
             </widget>
            </item>
