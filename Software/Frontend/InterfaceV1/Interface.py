@@ -1,8 +1,6 @@
 import sys
-import time
 from datetime import datetime
 from typing import Union
-import numpy as np
 from PyQt5 import QtWidgets, QtCore, uic
 from PyQt5.QtCore import QTimer
 from pyqtgraph.widgets import PlotWidget
@@ -10,7 +8,6 @@ from pyqtgraph import ViewBox, AxisItem, mkPen, BarGraphItem
 from EmittingStream import EmittingStream
 from PolarisationCalculation import Calculator
 from sys import platform
-import qutip
 
 class Interface(QtWidgets.QMainWindow):
 
@@ -84,14 +81,6 @@ class Interface(QtWidgets.QMainWindow):
         self.stokes_bar_graph = BarGraphItem(x=stokes_x, height=stokes_y, width=0.8, brush='r')
         self.stokes_parameters_widget.addItem(self.stokes_bar_graph)
 
-
-        # x = range(0, 10)
-        # y = range(0, 20, 2)
-        # self.poincare_sphere_widget.canvas.ax.plot(x, y)
-        # # refresh canvas
-        # self.poincare_sphere_widgetax.canvas.draw()
-
-
         self.start_stop_button.clicked.connect(self.system_control)
 
         print("System initialized. Ready to begin measurement.")
@@ -138,9 +127,7 @@ class Interface(QtWidgets.QMainWindow):
                 self.s3_value_xyplot.setText(S3_value_str)
                 self.dop_value_xyplot.setText(DOP_value_str)
                 self.handedness_value_xyplot.setText(handed_value_str)
-
-                x, y = self.calc.get_polarisation_ellipse_xy_data()
-                self.polarisation_ellipse_plot.setData(x, y)  # Used to update plot in realtime
+                self.plot_polarisation_ellipse()
 
             elif tab_index == 1:
                 self.s0_value_barchart.setText(S0_value_str)
@@ -149,9 +136,7 @@ class Interface(QtWidgets.QMainWindow):
                 self.s3_value_barchart.setText(S3_value_str)
                 self.dop_value_barchart.setText(DOP_value_str)
                 self.handedness_value_barchart.setText(handed_value_str)
-
-                stokes_y = self.calc.get_stokes_params()
-                self.stokes_bar_graph.setOpts(height=stokes_y)  # Used to update bar graph in realtime
+                self.plot_stokes_parameters()
 
             else:
                 self.s0_value_xyzplot.setText(S0_value_str)
@@ -160,12 +145,22 @@ class Interface(QtWidgets.QMainWindow):
                 self.s3_value_xyzplot.setText(S3_value_str)
                 self.dop_value_xyzplot.setText(DOP_value_str)
                 self.handedness_value_xyzplot.setText(handed_value_str)
+                self.plot_stokes_vector(S2/S0, S1/S0, S3/S0)
 
-                x = range(0, 10)
-                y = np.random.rand(10)
-                self.poincare_sphere_widget.canvas.ax.clear()
-                self.poincare_sphere_widget.canvas.ax.plot(x, y)
-                self.poincare_sphere_widget.canvas.draw()
+    def plot_polarisation_ellipse(self):
+        x, y = self.calc.get_polarisation_ellipse_xy_data()
+        self.polarisation_ellipse_plot.setData(x, y)  # Used to update plot in realtime
+    def plot_stokes_parameters(self):
+        stokes_y = self.calc.get_stokes_params()
+        self.stokes_bar_graph.setOpts(height=stokes_y)  # Used to update bar graph in realtime
+    def plot_stokes_vector(self, x, y, z):
+        l = self.poincare_sphere_widget.canvas.polarisation_line
+        l.set_data([0, x], [0, y])
+        l.set_3d_properties([0, z])
+        p = self.poincare_sphere_widget.canvas.polarisation_point
+        p.set_data([x], [y])
+        p.set_3d_properties([z])
+        self.poincare_sphere_widget.canvas.fig.canvas.draw_idle()
 
     @staticmethod
     def set_widget_titles(
@@ -196,34 +191,3 @@ class Interface(QtWidgets.QMainWindow):
         # Restore sys.stdout
         sys.stdout = sys.__stdout__
         sys.stderr = sys.__stderr__
-
-
-# OLD CODE FOR POINCARE SPHERE:
-# axis = opengl.GLAxisItem()
-# self.poincare_sphere_opengl_widget.addItem(axis)
-# grid = opengl.GLGridItem()
-# grid.setSize(5, 5, 5)
-# grid.setColor("#00000040")
-# self.poincare_sphere_opengl_widget.addItem(grid)
-# self.poincare_sphere_opengl_widget.setBackgroundColor('w')
-
-# # Attempt to draw poincare sphere manually
-# RADIUS = 1
-# x_sphere_data = np.linspace(-RADIUS, RADIUS, 256)
-# y_sphere_data = x_sphere_data
-# z_sphere_data = np.zeros((256, 256))
-#
-# i = 0
-# for x in x_sphere_data:
-#     j = 0
-#     for y in y_sphere_data:
-#         z_sphere_data[i, j] = np.sqrt(RADIUS ** 2 - x ** 2 - y ** 2)
-#         j += 1
-#     i += 1
-#
-# z_sphere_data_neg = -z_sphere_data
-# colors = (1,1,256)
-# hemisphere0 = opengl.GLSurfacePlotItem(x_sphere_data, y_sphere_data, z_sphere_data, smooth=False, colors=colors)
-# hemisphere1 = opengl.GLSurfacePlotItem(x_sphere_data, y_sphere_data, z_sphere_data_neg, smooth=False, colors=colors)
-# self.poincare_sphere_opengl_widget.addItem(hemisphere0)
-# self.poincare_sphere_opengl_widget.addItem(hemisphere1)

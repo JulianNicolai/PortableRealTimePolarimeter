@@ -81,7 +81,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <property name="iconSize">
        <size>
@@ -684,11 +684,33 @@
         <property name="bottomMargin">
          <number>0</number>
         </property>
-        <item row="0" column="1">
-         <widget class="QGroupBox" name="poincare_sphere_information">
+        <item row="0" column="0">
+         <widget class="MplWidget" name="poincare_sphere_widget" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>439</width>
+            <height>439</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
-            <width>300</width>
+            <width>439</width>
+            <height>16777215</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QGroupBox" name="poincare_sphere_information">
+          <property name="minimumSize">
+           <size>
+            <width>273</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>273</width>
             <height>16777215</height>
            </size>
           </property>
@@ -924,15 +946,8 @@
           </layout>
          </widget>
         </item>
-        <item row="0" column="0">
-         <widget class="MplWidget" name="poincare_sphere_widget" native="true">
-          <property name="minimumSize">
-           <size>
-            <width>451</width>
-            <height>439</height>
-           </size>
-          </property>
-         </widget>
+        <item row="0" column="1">
+         <widget class="QWidget" name="widget" native="true"/>
         </item>
        </layout>
       </widget>
