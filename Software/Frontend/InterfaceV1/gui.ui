@@ -152,7 +152,7 @@
           </property>
           <layout class="QFormLayout" name="formLayout">
            <property name="topMargin">
-            <number>0</number>
+            <number>9</number>
            </property>
            <item row="1" column="0">
             <widget class="QLabel" name="s0_label_xyplot">
@@ -419,9 +419,6 @@
            <string>Polarisation Parameters</string>
           </property>
           <layout class="QFormLayout" name="formLayout_2">
-           <property name="topMargin">
-            <number>0</number>
-           </property>
            <item row="1" column="0">
             <widget class="QLabel" name="s0_label_barchart">
              <property name="minimumSize">
@@ -432,7 +429,7 @@
              </property>
              <property name="font">
               <font>
-               <pointsize>20</pointsize>
+               <pointsize>18</pointsize>
               </font>
              </property>
              <property name="text">
@@ -448,7 +445,7 @@
              <property name="font">
               <font>
                <family>Consolas</family>
-               <pointsize>20</pointsize>
+               <pointsize>18</pointsize>
               </font>
              </property>
              <property name="text">
@@ -466,7 +463,7 @@
              </property>
              <property name="font">
               <font>
-               <pointsize>20</pointsize>
+               <pointsize>18</pointsize>
               </font>
              </property>
              <property name="text">
@@ -482,7 +479,7 @@
              <property name="font">
               <font>
                <family>Consolas</family>
-               <pointsize>20</pointsize>
+               <pointsize>18</pointsize>
               </font>
              </property>
              <property name="text">
@@ -500,7 +497,7 @@
              </property>
              <property name="font">
               <font>
-               <pointsize>20</pointsize>
+               <pointsize>18</pointsize>
               </font>
              </property>
              <property name="text">
@@ -516,7 +513,7 @@
              <property name="font">
               <font>
                <family>Consolas</family>
-               <pointsize>20</pointsize>
+               <pointsize>18</pointsize>
               </font>
              </property>
              <property name="text">
@@ -534,7 +531,7 @@
              </property>
              <property name="font">
               <font>
-               <pointsize>20</pointsize>
+               <pointsize>18</pointsize>
               </font>
              </property>
              <property name="text">
@@ -550,7 +547,7 @@
              <property name="font">
               <font>
                <family>Consolas</family>
-               <pointsize>20</pointsize>
+               <pointsize>18</pointsize>
               </font>
              </property>
              <property name="text">
@@ -568,7 +565,7 @@
              </property>
              <property name="font">
               <font>
-               <pointsize>20</pointsize>
+               <pointsize>18</pointsize>
               </font>
              </property>
              <property name="text">
@@ -584,7 +581,7 @@
              <property name="font">
               <font>
                <family>Consolas</family>
-               <pointsize>20</pointsize>
+               <pointsize>18</pointsize>
               </font>
              </property>
              <property name="text">
@@ -602,7 +599,7 @@
              </property>
              <property name="font">
               <font>
-               <pointsize>20</pointsize>
+               <pointsize>18</pointsize>
               </font>
              </property>
              <property name="text">
@@ -618,7 +615,7 @@
              <property name="font">
               <font>
                <family>Consolas</family>
-               <pointsize>20</pointsize>
+               <pointsize>18</pointsize>
               </font>
              </property>
              <property name="text">
@@ -722,9 +719,6 @@
            <string>Polarisation Parameters</string>
           </property>
           <layout class="QFormLayout" name="formLayout_3">
-           <property name="topMargin">
-            <number>0</number>
-           </property>
            <item row="1" column="0">
             <widget class="QLabel" name="s0_label_xyzplot">
              <property name="minimumSize">
@@ -735,7 +729,7 @@
              </property>
              <property name="font">
               <font>
-               <pointsize>20</pointsize>
+               <pointsize>18</pointsize>
               </font>
              </property>
              <property name="text">
@@ -751,7 +745,7 @@
              <property name="font">
               <font>
                <family>Consolas</family>
-               <pointsize>20</pointsize>
+               <pointsize>18</pointsize>
               </font>
              </property>
              <property name="text">
@@ -769,7 +763,7 @@
              </property>
              <property name="font">
               <font>
-               <pointsize>20</pointsize>
+               <pointsize>18</pointsize>
               </font>
              </property>
              <property name="text">
@@ -785,7 +779,7 @@
              <property name="font">
               <font>
                <family>Consolas</family>
-               <pointsize>20</pointsize>
+               <pointsize>18</pointsize>
               </font>
              </property>
              <property name="text">
@@ -803,7 +797,7 @@
              </property>
              <property name="font">
               <font>
-               <pointsize>20</pointsize>
+               <pointsize>18</pointsize>
               </font>
              </property>
              <property name="text">
@@ -819,7 +813,7 @@
              <property name="font">
               <font>
                <family>Consolas</family>
-               <pointsize>20</pointsize>
+               <pointsize>18</pointsize>
               </font>
              </property>
              <property name="text">
@@ -837,7 +831,7 @@
              </property>
              <property name="font">
               <font>
-               <pointsize>20</pointsize>
+               <pointsize>18</pointsize>
               </font>
              </property>
              <property name="text">
@@ -853,7 +847,7 @@
              <property name="font">
               <font>
                <family>Consolas</family>
-               <pointsize>20</pointsize>
+               <pointsize>18</pointsize>
               </font>
              </property>
              <property name="text">
@@ -871,7 +865,7 @@
              </property>
              <property name="font">
               <font>
-               <pointsize>20</pointsize>
+               <pointsize>18</pointsize>
               </font>
              </property>
              <property name="text">
@@ -887,7 +881,7 @@
              <property name="font">
               <font>
                <family>Consolas</family>
-               <pointsize>20</pointsize>
+               <pointsize>18</pointsize>
               </font>
              </property>
              <property name="text">
@@ -905,7 +899,7 @@
              </property>
              <property name="font">
               <font>
-               <pointsize>20</pointsize>
+               <pointsize>18</pointsize>
               </font>
              </property>
              <property name="text">
@@ -921,7 +915,7 @@
              <property name="font">
               <font>
                <family>Consolas</family>
-               <pointsize>20</pointsize>
+               <pointsize>18</pointsize>
               </font>
              </property>
              <property name="text">
@@ -975,7 +969,6 @@
              <property name="font">
               <font>
                <family>Consolas</family>
-               <pointsize>8</pointsize>
               </font>
              </property>
              <property name="alignment">
@@ -1052,7 +1045,7 @@
               <property name="font">
                <font>
                 <family>MS Shell Dlg 2</family>
-                <pointsize>20</pointsize>
+                <pointsize>18</pointsize>
                 <weight>75</weight>
                 <bold>true</bold>
                </font>
@@ -1081,15 +1074,9 @@
         </property>
         <item row="0" column="0">
          <widget class="QGroupBox" name="groupBox">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>270</height>
-           </size>
-          </property>
           <property name="maximumSize">
            <size>
-            <width>270</width>
+            <width>330</width>
             <height>16777215</height>
            </size>
           </property>
@@ -1156,7 +1143,6 @@
              <property name="font">
               <font>
                <family>Consolas</family>
-               <pointsize>8</pointsize>
               </font>
              </property>
              <property name="alignment">
@@ -1264,7 +1250,7 @@
            </property>
            <property name="font">
             <font>
-             <pointsize>20</pointsize>
+             <pointsize>18</pointsize>
              <weight>75</weight>
              <bold>true</bold>
             </font>
