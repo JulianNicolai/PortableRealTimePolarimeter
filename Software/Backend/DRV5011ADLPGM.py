@@ -16,7 +16,6 @@ class DRV5011ADLPGM:
         try:
             while True:
                 self.wait_for_magnetic_field()
-                time.sleep(0.2)  # Debouncing
         except KeyboardInterrupt:
             self.cleanup()
 
