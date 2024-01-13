@@ -372,6 +372,12 @@
            </item>
            <item row="7" column="0" colspan="2">
             <widget class="QPushButton" name="rand_stokes_button_xyplot">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>45</height>
+              </size>
+             </property>
              <property name="maximumSize">
               <size>
                <width>253</width>
@@ -628,6 +634,12 @@
            </item>
            <item row="7" column="0" colspan="2">
             <widget class="QPushButton" name="rand_stokes_button_barchart">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>45</height>
+              </size>
+             </property>
              <property name="maximumSize">
               <size>
                <width>253</width>
@@ -931,6 +943,12 @@
            </item>
            <item row="7" column="0" colspan="2">
             <widget class="QPushButton" name="rand_stokes_button_xyzplot">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>45</height>
+              </size>
+             </property>
              <property name="maximumSize">
               <size>
                <width>253</width>
@@ -1249,18 +1267,18 @@
             <height>375</height>
            </size>
           </property>
-          <property name="maximumSize">
-           <size>
-            <width>349</width>
-            <height>16777215</height>
-           </size>
-          </property>
           <property name="title">
            <string>Measurement</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_7">
            <item row="1" column="1">
             <widget class="QSpinBox" name="rotations_frame_value">
+             <property name="minimumSize">
+              <size>
+               <width>121</width>
+               <height>0</height>
+              </size>
+             </property>
              <property name="font">
               <font>
                <family>Consolas</family>
@@ -1288,6 +1306,12 @@
            </item>
            <item row="2" column="1">
             <widget class="QSpinBox" name="samples_rotation_value">
+             <property name="minimumSize">
+              <size>
+               <width>121</width>
+               <height>0</height>
+              </size>
+             </property>
              <property name="font">
               <font>
                <family>Consolas</family>
@@ -1334,7 +1358,7 @@
             <widget class="QSpinBox" name="motor_speed_value">
              <property name="minimumSize">
               <size>
-               <width>151</width>
+               <width>121</width>
                <height>0</height>
               </size>
              </property>
@@ -1459,7 +1483,7 @@
              <widget class="QPushButton" name="plus_100">
               <property name="geometry">
                <rect>
-                <x>40</x>
+                <x>30</x>
                 <y>0</y>
                 <width>31</width>
                 <height>41</height>
@@ -1480,7 +1504,7 @@
              <widget class="QPushButton" name="minus_100">
               <property name="geometry">
                <rect>
-                <x>40</x>
+                <x>30</x>
                 <y>50</y>
                 <width>31</width>
                 <height>41</height>
@@ -1501,7 +1525,7 @@
              <widget class="QPushButton" name="plus_10">
               <property name="geometry">
                <rect>
-                <x>80</x>
+                <x>60</x>
                 <y>0</y>
                 <width>31</width>
                 <height>41</height>
@@ -1522,7 +1546,7 @@
              <widget class="QPushButton" name="minus_10">
               <property name="geometry">
                <rect>
-                <x>80</x>
+                <x>60</x>
                 <y>50</y>
                 <width>31</width>
                 <height>41</height>
@@ -1543,7 +1567,7 @@
              <widget class="QPushButton" name="plus_1">
               <property name="geometry">
                <rect>
-                <x>120</x>
+                <x>90</x>
                 <y>0</y>
                 <width>31</width>
                 <height>41</height>
@@ -1564,7 +1588,7 @@
              <widget class="QPushButton" name="minus_1">
               <property name="geometry">
                <rect>
-                <x>120</x>
+                <x>90</x>
                 <y>50</y>
                 <width>31</width>
                 <height>41</height>
@@ -1585,9 +1609,9 @@
              <widget class="QPushButton" name="reset_parameters_button">
               <property name="geometry">
                <rect>
-                <x>40</x>
+                <x>20</x>
                 <y>100</y>
-                <width>71</width>
+                <width>81</width>
                 <height>41</height>
                </rect>
               </property>
