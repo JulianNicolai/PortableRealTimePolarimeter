@@ -1,11 +1,11 @@
 import sys
 from PyQt5 import QtWidgets
-from Interface import Interface
+from interface import Interface
 
 
 class Main:
 
-    IN_PRODUCTION = True
+    IN_PRODUCTION = False
 
     def __init__(self, argv):
         app = QtWidgets.QApplication(argv)

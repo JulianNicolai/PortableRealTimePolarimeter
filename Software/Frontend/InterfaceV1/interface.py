@@ -5,9 +5,11 @@ from PyQt5 import QtWidgets, QtCore, uic
 from PyQt5.QtCore import QTimer
 from pyqtgraph.widgets import PlotWidget
 from pyqtgraph import ViewBox, AxisItem, mkPen, BarGraphItem
-from EmittingStream import EmittingStream
-from PolarisationCalculation import Calculator
+from emittingstream import EmittingStream
+from polcalc import PolarisationStateTracker
 from sys import platform
+from interfaceconfig import Configuration
+
 
 class Interface(QtWidgets.QMainWindow):
 
@@ -45,7 +47,21 @@ class Interface(QtWidgets.QMainWindow):
         self.rand_stokes_button_xyplot.clicked.connect(self.generate_random_polarisation)
         self.rand_stokes_button_barchart.clicked.connect(self.generate_random_polarisation)
         self.rand_stokes_button_xyzplot.clicked.connect(self.generate_random_polarisation)
-        self.tabWidget.currentChanged.connect(self.update_plots)
+        self.tab_widget.currentChanged.connect(self.update_plots)
+
+        self.config = Configuration(self)
+
+        self.minus_1.clicked.connect(lambda: self.change_config_value(-1))
+        self.minus_10.clicked.connect(lambda: self.change_config_value(-10))
+        self.minus_100.clicked.connect(lambda: self.change_config_value(-100))
+        self.minus_1000.clicked.connect(lambda: self.change_config_value(-1000))
+        self.plus_1.clicked.connect(lambda: self.change_config_value(1))
+        self.plus_10.clicked.connect(lambda: self.change_config_value(10))
+        self.plus_100.clicked.connect(lambda: self.change_config_value(100))
+        self.plus_1000.clicked.connect(lambda: self.change_config_value(1000))
+
+        self.reset_parameters_button.clicked.connect(self.reset_config_parameters)
+        self.apply_config_button.clicked.connect(self.apply_config_parameters)
 
         self.polarisation_ellipse_widget.disableAutoRange(ViewBox.XYAxes)
         self.polarisation_ellipse_widget.setRange(yRange=(-1, 1), xRange=(-1, 1))
@@ -60,7 +76,7 @@ class Interface(QtWidgets.QMainWindow):
         self.polarisation_ellipse_widget.getAxis('left').setTextPen(black_pen)
         self.polarisation_ellipse_widget.setMouseEnabled(x=False, y=False)
 
-        self.calc = Calculator(256)
+        self.calc = PolarisationStateTracker()
         self.calc.generate_random_polarisation()
         self.update_plots()
 
@@ -105,9 +121,26 @@ class Interface(QtWidgets.QMainWindow):
         self.calc.generate_random_polarisation()
         self.update_plots()
 
+    def change_config_value(self, value):
+        if self.motor_speed_button.isChecked():
+            new_value = self.motor_speed_value.value() + value
+            self.config.update_motor_speed_percent(new_value)
+        elif self.rotations_frame_button.isChecked():
+            new_value = self.rotations_frame_value.value() + value
+            self.config.update_rotations_per_frame(new_value)
+        else:
+            new_value = self.samples_rotation_value.value() + value
+            self.config.update_samples_per_rotation(new_value)
+
+    def reset_config_parameters(self):
+        self.config.reset()
+
+    def apply_config_parameters(self):
+        self.config.apply_config()
+
     def update_plots(self):
 
-        tab_index = self.tabWidget.currentIndex()
+        tab_index = self.tab_widget.currentIndex()
         if 0 <= tab_index <= 2:
             S0, S1, S2, S3 = self.calc.get_stokes_params()
             DOP = self.calc.get_dop()
@@ -150,16 +183,18 @@ class Interface(QtWidgets.QMainWindow):
     def plot_polarisation_ellipse(self):
         x, y = self.calc.get_polarisation_ellipse_xy_data()
         self.polarisation_ellipse_plot.setData(x, y)  # Used to update plot in realtime
+
     def plot_stokes_parameters(self):
         stokes_y = self.calc.get_stokes_params()
         self.stokes_bar_graph.setOpts(height=stokes_y)  # Used to update bar graph in realtime
+
     def plot_stokes_vector(self, x, y, z):
-        l = self.poincare_sphere_widget.canvas.polarisation_line
-        l.set_data([0, x], [0, y])
-        l.set_3d_properties([0, z])
-        p = self.poincare_sphere_widget.canvas.polarisation_point
-        p.set_data([x], [y])
-        p.set_3d_properties([z])
+        line = self.poincare_sphere_widget.canvas.polarisation_line
+        line.set_data([0, x], [0, y])
+        line.set_3d_properties([0, z])
+        point = self.poincare_sphere_widget.canvas.polarisation_point
+        point.set_data([x], [y])
+        point.set_3d_properties([z])
         self.poincare_sphere_widget.canvas.fig.canvas.draw_idle()
 
     @staticmethod

@@ -1,7 +1,8 @@
 import spidev
 import time
 
-class PhotoDiode:
+
+class PhotodiodeMeasurement:
     # Device: MAX1242BCPA ADC IC measuring photodiode voltage.
 
     def __init__(self, bus=0, device=0, max_speed_hz=500000):
@@ -21,10 +22,11 @@ class PhotoDiode:
     def close(self):
         self.spi.close()
 
+
 # Example usage
 if __name__ == "__main__":
 
-    adc = PhotoDiode()
+    adc = PhotodiodeMeasurement()
 
     try:
         while True:

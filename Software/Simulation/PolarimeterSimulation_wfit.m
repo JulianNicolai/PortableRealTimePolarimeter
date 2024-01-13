@@ -1,13 +1,18 @@
 % Polarization Simulation
 close all
 clear all
-RPM = 3840;  % [RPM]
-integ_time = 1;  % [s]
-cycles = RPM * integ_time / 60;
+% RPM = 3840;  % [RPM]
+RPM = 3648;  % [RPM]
+cycles = 5;
+integ_time = cycles * 60 / RPM;  % [s]
+fps = 1/integ_time;
+% cycles = RPM * integ_time / 60;
 % cycles = 78;
-N = 100; % Number of points per cycle
+N = 1562; % Number of points per cycle
 
 samples = N * cycles;
+
+samples_per_sec = N * RPM / 60;
 
 Ts = 2*pi/N;
 
@@ -35,9 +40,12 @@ ymod = y(1:(cycles*N / 2 + 1)) / samples;
 yscaled = [ymod(1), ymod(2:end) * 2];
 yscaledabs = abs(yscaled);
 
+w1 = round(1 + (2 * cycles));
+w2 = round(1 + (4 * cycles));
+
 A0 = yscaled(1);
-A1 = yscaled(129);
-A2 = yscaled(257);
+A1 = yscaled(w1) + yscaled(w1+1) + yscaled(w1+2) + yscaled(w1-1) + yscaled(w1-2);
+A2 = yscaled(w2) + yscaled(w2+1) + yscaled(w2+2) + yscaled(w2-1) + yscaled(w2-2);
 
 S1_calc = real(A2) * 4;
 S2_calc = imag(A2) * -4;
@@ -53,8 +61,15 @@ S0_calc = 2*A0 - S1_calc/2;
 
 plot(yscaledabs)
 
-savedata = [theta.', Itheta.'];
-writematrix(savedata, 'data1.csv')
+% savedata = [theta.', Itheta.'];
+% writematrix(savedata, 'data1.csv')
+
+% loc = w1;
+% rng = loc-30:1:loc+30;
+% comet3(real(yscaled(rng)), imag(yscaled(rng)), rng)
+% xlabel("Real")
+% ylabel("Imag")
+% zlabel("Frequency")
 
 % plot(fshift, yshiftabs)
 % plot(y(1:(cycles*N / 2 + 1))/samples)

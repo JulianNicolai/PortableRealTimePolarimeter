@@ -4,10 +4,11 @@ from numpy import sin, cos
 from scipy.fft import fft
 
 
-class Calculator:
+class PolarisationStateTracker:
 
-    def __init__(self, num_points):
-        self.t = np.linspace(0, 2 * np.pi, num_points)
+    def __init__(self):
+        ellipse_resolution = 256
+        self.t = np.linspace(0, 2 * np.pi, ellipse_resolution)
         self.S0 = 0.0
         self.S1 = 0.0
         self.S2 = 0.0

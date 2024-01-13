@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 
+
 class MotorClock:
     # Device: DRV5011ADLPGM Hall effect sensor that monitors motor rotational speed.
 
