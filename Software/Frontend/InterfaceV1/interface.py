@@ -62,6 +62,8 @@ class Interface(QtWidgets.QMainWindow):
 
         self.reset_parameters_button.clicked.connect(self.reset_config_parameters)
         self.apply_config_button.clicked.connect(self.apply_config_parameters)
+        self.save_config_button.clicked.connect(self.save_config_parameters)
+        self.save_log_button.clicked.connect(self.save_log)
 
         self.polarisation_ellipse_widget.disableAutoRange(ViewBox.XYAxes)
         self.polarisation_ellipse_widget.setRange(yRange=(-1, 1), xRange=(-1, 1))
@@ -137,6 +139,17 @@ class Interface(QtWidgets.QMainWindow):
 
     def apply_config_parameters(self):
         self.config.apply_config()
+
+    def save_config_parameters(self):
+        self.config.save_config()
+
+    def save_log(self):
+        timestamp = datetime.now().strftime("%y%m%dT%H%M%S")
+        filename = f"logs/log-{timestamp}.txt"
+        data = self.log_textbox.toPlainText()
+        with open(filename, 'w') as file:
+            file.write(data)
+        print(f"Log saved to disc successfully to: ./{filename}")
 
     def update_plots(self):
 

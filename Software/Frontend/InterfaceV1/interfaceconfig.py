@@ -1,16 +1,28 @@
+from configparser import ConfigParser
+
 class Configuration:
+
     MOTOR_MAX_SPEED = 3840  # [RPM]
-    MOTOR_SPEED_PERCENT = 100  # [%]
-    ROTATIONS_PER_FRAME = 5
-    SAMPLES_PER_ROTATION = 1562
 
     def __init__(self, interface):
 
         self.interface = interface
 
-        self.motor_speed_percent = self.MOTOR_SPEED_PERCENT
-        self.rotations_per_frame = self.ROTATIONS_PER_FRAME
-        self.samples_per_rotation = self.SAMPLES_PER_ROTATION
+        self.saved_config = ConfigParser()
+        self.saved_config.read('config.ini')
+
+        try:
+            self.motor_speed_percent = int(self.saved_config.get('Capture Settings', 'MOTOR_SPEED_PERCENT'))
+            self.rotations_per_frame = int(self.saved_config.get('Capture Settings', 'ROTATIONS_PER_FRAME'))
+            self.samples_per_rotation = int(self.saved_config.get('Capture Settings', 'SAMPLES_PER_ROTATION'))
+        except ValueError:
+            print("Configuration error! One or more configuration values contain non-numeric characters or non-integer "
+                  "values (floats are invalid). Verify the config is correct or save the configuration through the "
+                  "interface. Falling back to default values.")
+
+            self.motor_speed_percent = 100
+            self.rotations_per_frame = 5
+            self.samples_per_rotation = 1562
 
         self.set_motor_speed = None
         self.actual_motor_speed = None
@@ -108,10 +120,23 @@ class Configuration:
         self.applied = True
         self.changes_made()
 
-        print(f"Applied current configuration parameters successfully:"
-              f"Motor Speed: {self.motor_speed_percent}"
-              f"Rotations/Frame: {self.rotations_per_frame}"
-              f"Samples/Rotation: {self.samples_per_rotation}")
+        print(f"Applied current configuration parameters successfully. "
+              f"Motor Speed: {self.motor_speed_percent}  "
+              f"Rotations/Frame: {self.rotations_per_frame}  "
+              f"Samples/Rotation: {self.samples_per_rotation}  ")
+
+    def save_config(self):
+
+        self.apply_config()
+
+        self.saved_config.set('Capture Settings', 'MOTOR_SPEED_PERCENT', str(self.motor_speed_percent))
+        self.saved_config.set('Capture Settings', 'ROTATIONS_PER_FRAME', str(self.rotations_per_frame))
+        self.saved_config.set('Capture Settings', 'SAMPLES_PER_ROTATION', str(self.samples_per_rotation))
+
+        with open('config.ini', 'w') as file:
+            self.saved_config.write(file)
+
+        print("Configuration saved to disk successfully.")
 
     def changes_made(self):
         if not self.applied:
