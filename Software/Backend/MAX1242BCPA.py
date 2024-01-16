@@ -1,7 +1,7 @@
 import spidev
 import time
 
-class MAX1242BCPA:
+class AD677JNZ:
     def __init__(self, bus=0, device=0, max_speed_hz=500000):
         self.spi = spidev.SpiDev()
         self.spi.open(bus, device)
@@ -21,7 +21,7 @@ class MAX1242BCPA:
 
 # Example usage
 try:
-    adc = MAX1242BCPA()
+    adc = AD677JNZ()
     while True:
         adc_value = adc.read_adc()
         print("ADC Value: %d" % adc_value)
