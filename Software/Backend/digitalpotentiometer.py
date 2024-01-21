@@ -1,9 +1,9 @@
 import spidev
 import time
 
-class MCP4162:
+class digipot:
     def __init__(self, total_resistance=100000, bus=0, device=0, max_speed_hz=500000):
-        self.total_resistance = total_resistance  # Set the total resistance to 100kΩ
+        self.total_resistance = total_resistance
         self.spi = spidev.SpiDev()
         self.spi.open(bus, device)
         self.spi.max_speed_hz = max_speed_hz
@@ -17,23 +17,16 @@ class MCP4162:
     def display_resistance(self, value):
         # Calculate the resistance based on the wiper position
         resistance = self.total_resistance * (value / 255.0)
-        print(f"Current resistance: {resistance:.2f} ohms")
-
-    def sweep(self, sweep_range=256, delay=0.01):
-        for i in range(sweep_range):
-            self.write_pot(i)
-            time.sleep(delay)
-        for i in range(sweep_range - 1, -1, -1):
-            self.write_pot(i)
-            time.sleep(delay)
+        print(f"Current resistance: {resistance:0.2f} ohms")
 
     def close(self):
         self.spi.close()
 
-# Usage
 try:
-    potentiometer = MCP4162()
-    while True:
-        potentiometer.sweep()
+    potentiometer = digipot()
+    value = input("Please enter a value between 0 and 254: ")
+    potentiometer.write_pot(int(value))
+except ValueError:
+    print("Invalid input! Please enter a numeric value.")
 except KeyboardInterrupt:
     potentiometer.close()
