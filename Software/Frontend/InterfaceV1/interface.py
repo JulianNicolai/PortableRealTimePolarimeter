@@ -1,11 +1,17 @@
 import sys
 from datetime import datetime
+from multiprocessing import Event, Pipe, shared_memory
+
+import numpy as np
 from PyQt5 import QtWidgets, QtCore, uic
-from PyQt5.QtCore import QTimer
+from PyQt5.QtCore import QTimer, QThread, pyqtSlot
+
+from datacollector import DataCollector
 from emittingstream import EmittingStream
 from interfaceplots import InterfacePlotter
 from sys import platform
 from interfaceconfig import Configuration
+from interprocesscommhub import InterprocessCommunicationHub
 
 
 class Interface(QtWidgets.QMainWindow):
@@ -47,6 +53,8 @@ class Interface(QtWidgets.QMainWindow):
 
         self.config = Configuration(self)
 
+        self.plotter = InterfacePlotter(self)
+
         self.rand_stokes_button_xyplot.clicked.connect(self.generate_random_polarisation)
         self.rand_stokes_button_barchart.clicked.connect(self.generate_random_polarisation)
         self.rand_stokes_button_xyzplot.clicked.connect(self.generate_random_polarisation)
@@ -66,19 +74,74 @@ class Interface(QtWidgets.QMainWindow):
         self.save_config_button.clicked.connect(self.save_config_parameters)
         self.save_log_button.clicked.connect(self.save_log)
 
-        self.plotter = InterfacePlotter(self)
-
         self.start_stop_button.clicked.connect(self.system_control)
+
+        self.collect_data_event = Event()
+        self.init_shutdown_event = Event()
+
+        self.buffer_size = 6400
+
+        buffer = np.ndarray(shape=(self.buffer_size,), dtype=np.uint16)
+        shared_memory_space_0 = shared_memory.SharedMemory(create=True, size=buffer.nbytes)
+        shared_memory_space_1 = shared_memory.SharedMemory(create=True, size=buffer.nbytes)
+        self.frame_buffer_data_0 = np.ndarray(shape=buffer.shape, dtype=buffer.dtype, buffer=shared_memory_space_0.buf)
+        self.frame_buffer_data_1 = np.ndarray(shape=buffer.shape, dtype=buffer.dtype, buffer=shared_memory_space_1.buf)
+        self.current_frame_buffer = self.frame_buffer_data_1
+
+        self.data_collector = None
+
+        # self.start_workers()
 
         print("System initialized. Ready to begin measurement.")
 
     def system_control(self):
         if self.start_stop_button.isChecked():
             self.start_stop_button.setEnabled(False)
+            self.collect_data_event.set()
             QTimer.singleShot(1000, lambda: self.start_stop_button.setDisabled(False))
             print("System started!")
         else:
+            self.collect_data_event.clear()
             print("System stopped!")
+
+    def start_workers(self):
+
+        self.collect_data_event.clear()
+        self.init_shutdown_event.clear()
+
+        self.inter_comm_hub_worker = InterprocessCommunicationHub(
+            self.collect_data_event,
+            self.init_shutdown_event
+        )
+        self.pipe_connection_sender = self.inter_comm_hub_worker.get_pipe_connection_sender()
+        self.inter_comm_hub_thread = QThread()
+        self.inter_comm_hub_worker.moveToThread(self.inter_comm_hub_thread)
+        self.inter_comm_hub_thread.started.connect(self.inter_comm_hub_worker.listen)
+        self.inter_comm_hub_worker.signal.connect(self.process_filled_buffer)
+        self.inter_comm_hub_thread.start()
+
+        self.data_collector = DataCollector(self.buffer_size,
+                                            self.frame_buffer_data_0,
+                                            self.frame_buffer_data_1,
+                                            self.pipe_connection_sender,
+                                            self.collect_data_event,
+                                            self.init_shutdown_event)
+        self.data_collector.start()
+
+    @pyqtSlot(int)
+    def process_filled_buffer(self, value: int):
+        self.swap_buffer()
+        # num_of_cycles = self.config.get_rotations_per_frame()
+        # num_of_samples = self.config.get_samples_per_frame()
+        num_of_cycles = 64
+        num_of_samples = 6400
+        self.plotter.calc.calculate_stokes_from_measurements(self.current_frame_buffer, num_of_cycles, num_of_samples)
+
+    def swap_buffer(self):
+        if self.current_frame_buffer is self.frame_buffer_data_1:
+            self.current_frame_buffer = self.frame_buffer_data_0
+        else:
+            self.current_frame_buffer = self.frame_buffer_data_1
 
     def output_stream_to_log(self, statement):
         timestamp = self.generate_timestamp(0)
@@ -141,6 +204,7 @@ class Interface(QtWidgets.QMainWindow):
         return datetime.now().strftime(format_string)
 
     def __del__(self):
+
         # Restore sys.stdout and sys.stderr
         sys.stdout = sys.__stdout__
         sys.stderr = sys.__stderr__

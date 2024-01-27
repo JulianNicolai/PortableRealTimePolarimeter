@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import time
 
 
-class MotorClock:
+class HallSensor:
     # Device: DRV5011ADLPGM Hall effect sensor that monitors motor rotational speed.
 
     def __init__(self, pin):

@@ -2,7 +2,7 @@ import spidev
 import time
 
 
-class PhotodiodeMeasurement:
+class Photodiode:
     # Device: MAX1242BCPA ADC IC measuring photodiode voltage.
 
     def __init__(self, bus=0, device=0, max_speed_hz=500000):

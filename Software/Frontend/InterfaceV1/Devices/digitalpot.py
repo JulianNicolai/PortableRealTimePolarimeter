@@ -2,7 +2,7 @@ import spidev
 import time
 
 
-class MotorControl:
+class DigitalPotentiometer:
     def __init__(self, total_resistance=100000, bus=0, device=0, max_speed_hz=500000):
         self.total_resistance = total_resistance  # Set the total resistance to 100kΩ
         self.spi = spidev.SpiDev()
