@@ -16,8 +16,8 @@ fn recv_packets(buffer_length: u16) -> PyResult<()> {
 }
 
 fn read_spi(spi: &mut Spidev, rx_buffer: &mut [u16], buffer_length: u16) -> io::Result<()> {
-    let tx_arr = [0u8; 2];
-    let mut rx_arr = [0u8; 2];
+    let tx_arr: [u8; 2] = [0xAB, 0xCD];
+    let mut rx_arr: [u8; 2] = [0u8; 2];
     for i in 0..buffer_length as usize {
         {
             let mut transfer = SpidevTransfer::read_write(&tx_arr, &mut rx_arr);
