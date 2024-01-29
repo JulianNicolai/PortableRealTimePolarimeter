@@ -1,5 +1,5 @@
 // use pyo3::{buffer, prelude::*};
-use pyo3::{prelude::*};
+use pyo3::{methods::OkWrap, prelude::*};
 use std::io;
 // use std::io::prelude::*;
 use spidev::{SpiModeFlags, Spidev, SpidevOptions, SpidevTransfer};
@@ -8,11 +8,11 @@ const MAX_BUFFER_SIZE: usize = 32768;
 
 /// Some test code to recieve SPI data.
 #[pyfunction]
-fn recv_packets(buffer_length: u16) -> PyResult<()> {
+fn recv_packets(buffer_length: u16) -> PyResult<Vec<u16>> {
     let mut spi = create_spi().unwrap();
     let mut rx_buffer = [0u16; MAX_BUFFER_SIZE];
     read_spi(&mut spi, &mut rx_buffer, buffer_length).unwrap();
-    PyResult::Ok(())
+    PyResult::Ok(rx_buffer.to_vec())
 }
 
 fn read_spi(spi: &mut Spidev, rx_buffer: &mut [u16], buffer_length: u16) -> io::Result<()> {

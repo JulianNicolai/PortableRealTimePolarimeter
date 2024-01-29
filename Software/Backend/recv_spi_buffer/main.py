@@ -1,3 +1,3 @@
-from recv_spi_buffer import sum_as_string
+from recv_spi_buffer import recv_packets
 
-print(sum_as_string(51, 123))
+print(recv_packets(200))
