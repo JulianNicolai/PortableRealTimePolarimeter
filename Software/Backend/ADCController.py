@@ -1,7 +1,9 @@
 import spidev
 import time
 
-class AD677JNZ:
+
+class ADCController:
+
     def __init__(self, bus=0, device=0, max_speed_hz=500000):
         self.spi = spidev.SpiDev()
         self.spi.open(bus, device)
@@ -10,24 +12,23 @@ class AD677JNZ:
 
     def read_adc(self):
         resp = self.spi.xfer2([0x00, 0x00])
-        value = ((resp[0] & 0x0F) << 8) | resp[1]
+        value = (resp[0] << 8) + resp[1]
         return value
 
-    def calculate_voltage(self, adc_value, reference_voltage=3.3):
+    def calculate_voltage(self, adc_value, reference_voltage=4.096):
         return (adc_value * reference_voltage) / 4095
 
     def close(self):
         self.spi.close()
 
-# Example usage
+
 try:
-    adc = AD677JNZ()
+    adc = ADCController()
     while True:
         adc_value = adc.read_adc()
-        print("ADC Value: %d" % adc_value)
         voltage = adc.calculate_voltage(adc_value)
-        print("Potentiometer Voltage: %.2f V" % voltage)
-        time.sleep(0.5)
+        print(f"{adc_value:016b} -> {voltage:.2f} V")
+        time.sleep(0.1)
 
 except KeyboardInterrupt:
     adc.close()
