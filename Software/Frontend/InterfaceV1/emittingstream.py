@@ -2,6 +2,8 @@ from PyQt5 import QtCore
 
 
 class EmittingStream(QtCore.QObject):
+    """Class used to redirect stdout and stderr steams (i.e. console output/print statements) to the main thread to be
+    displayed within GUI log."""
 
     statement = QtCore.pyqtSignal(str)
 

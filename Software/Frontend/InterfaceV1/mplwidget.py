@@ -3,15 +3,16 @@
 from PyQt5 import QtWidgets
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as Canvas
-import matplotlib
+from matplotlib import use
 import numpy as np
 
-# Ensure using PyQt5 backend
-matplotlib.use('QT5Agg')
+
+use('QT5Agg')  # Ensures using PyQt5 backend with Matplotlib
 
 
-# Matplotlib canvas class to create figure
 class MplCanvas(Canvas):
+    """Class used to generate and render Matplotlib canvas for Poincare sphere visualisation."""
+
     def __init__(self):
 
         self.fig = Figure((439, 439))
@@ -76,6 +77,8 @@ class MplCanvas(Canvas):
 
 # Matplotlib widget
 class MplWidget(QtWidgets.QWidget):
+    """Class used to create QWidget to display Matplotlib 3D plot."""
+
     def __init__(self, parent=None):
         QtWidgets.QWidget.__init__(self, parent)   # Inherit from QWidget
         self.canvas = MplCanvas()                  # Create canvas object

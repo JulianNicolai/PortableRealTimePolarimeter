@@ -47,28 +47,9 @@ class Interface(QtWidgets.QMainWindow):
 
         self.config = Configuration(self)
 
-        self.rand_stokes_button_xyplot.clicked.connect(self.generate_random_polarisation)
-        self.rand_stokes_button_barchart.clicked.connect(self.generate_random_polarisation)
-        self.rand_stokes_button_xyzplot.clicked.connect(self.generate_random_polarisation)
-        self.tab_widget.currentChanged.connect(self.update_plots)
-
-        self.minus_1.clicked.connect(lambda: self.change_config_value(-1))
-        self.minus_10.clicked.connect(lambda: self.change_config_value(-10))
-        self.minus_100.clicked.connect(lambda: self.change_config_value(-100))
-        self.minus_1000.clicked.connect(lambda: self.change_config_value(-1000))
-        self.plus_1.clicked.connect(lambda: self.change_config_value(1))
-        self.plus_10.clicked.connect(lambda: self.change_config_value(10))
-        self.plus_100.clicked.connect(lambda: self.change_config_value(100))
-        self.plus_1000.clicked.connect(lambda: self.change_config_value(1000))
-
-        self.reset_parameters_button.clicked.connect(self.reset_config_parameters)
-        self.apply_config_button.clicked.connect(self.apply_config_parameters)
-        self.save_config_button.clicked.connect(self.save_config_parameters)
-        self.save_log_button.clicked.connect(self.save_log)
-
         self.plotter = InterfacePlotter(self)
 
-        self.start_stop_button.clicked.connect(self.system_control)
+        self.establish_button_connections()
 
         print("System initialized. Ready to begin measurement.")
 
@@ -79,14 +60,6 @@ class Interface(QtWidgets.QMainWindow):
             print("System started!")
         else:
             print("System stopped!")
-
-    def output_stream_to_log(self, statement):
-        timestamp = self.generate_timestamp(0)
-        self.log_textbox.append(f"<span>[{timestamp}] {statement}</span>")
-
-    def error_stream_to_log(self, statement):
-        timestamp = self.generate_timestamp(0)
-        self.log_textbox.append(f"<span style='color:red'>[{timestamp}] {statement}</span>")
 
     def generate_random_polarisation(self):
         self.plotter.generate_random_polarisation()
@@ -103,15 +76,6 @@ class Interface(QtWidgets.QMainWindow):
             new_value = self.samples_rotation_value.value() + value
             self.config.update_samples_per_rotation(new_value)
 
-    def reset_config_parameters(self):
-        self.config.reset()
-
-    def apply_config_parameters(self):
-        self.config.apply_config()
-
-    def save_config_parameters(self):
-        self.config.save_config()
-
     def save_log(self):
         timestamp = self.generate_timestamp(1)
         filename = f"logs/log-{timestamp}.txt"
@@ -120,17 +84,36 @@ class Interface(QtWidgets.QMainWindow):
             file.write(data)
         print(f"Log saved to disc successfully to: ./{filename}")
 
-    def update_plots(self):
-        self.plotter.update_plots()
+    def output_stream_to_log(self, statement):
+        timestamp = self.generate_timestamp(0)
+        self.log_textbox.append(f"<span>[{timestamp}] {statement}</span>")
 
-    def plot_polarisation_ellipse(self):
-        self.plotter.plot_polarisation_ellipse()
+    def error_stream_to_log(self, statement):
+        timestamp = self.generate_timestamp(0)
+        self.log_textbox.append(f"<span style='color:red'>[{timestamp}] {statement}</span>")
 
-    def plot_stokes_parameters(self):
-        self.plotter.plot_stokes_parameters()
+    def establish_button_connections(self):
 
-    def plot_stokes_vector(self, x, y, z):
-        self.plotter.plot_stokes_vector(x, y, z)
+        self.rand_stokes_button_xyplot.clicked.connect(self.generate_random_polarisation)
+        self.rand_stokes_button_barchart.clicked.connect(self.generate_random_polarisation)
+        self.rand_stokes_button_xyzplot.clicked.connect(self.generate_random_polarisation)
+        self.tab_widget.currentChanged.connect(self.plotter.update_plots)
+
+        self.minus_1.clicked.connect(lambda: self.change_config_value(-1))
+        self.minus_10.clicked.connect(lambda: self.change_config_value(-10))
+        self.minus_100.clicked.connect(lambda: self.change_config_value(-100))
+        self.minus_1000.clicked.connect(lambda: self.change_config_value(-1000))
+        self.plus_1.clicked.connect(lambda: self.change_config_value(1))
+        self.plus_10.clicked.connect(lambda: self.change_config_value(10))
+        self.plus_100.clicked.connect(lambda: self.change_config_value(100))
+        self.plus_1000.clicked.connect(lambda: self.change_config_value(1000))
+
+        self.reset_parameters_button.clicked.connect(self.config.reset)
+        self.apply_config_button.clicked.connect(self.config.apply_config)
+        self.save_config_button.clicked.connect(self.config.save_config)
+        self.save_log_button.clicked.connect(self.save_log)
+
+        self.start_stop_button.clicked.connect(self.system_control)
 
     @staticmethod
     def generate_timestamp(format_type):
