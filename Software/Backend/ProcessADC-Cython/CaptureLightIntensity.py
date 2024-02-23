@@ -12,36 +12,36 @@ class CaptureLightIntensity(Process):
     def __init__(self, shutdown_event, data_queue, hall_pin, num_cycles, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.clk_val = 0
-        self.NUM_CYCLES = num_cycles
+        self.NUM_CYCLES = num_cycles * 2
         self.HALL_PIN = hall_pin
         self.buffer_size = 25000
         self.shutdown_event = shutdown_event
 
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(self.HALL_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.add_event_detect(self.HALL_PIN, GPIO.FALLING, callback=self.inc)
+        # GPIO.setmode(GPIO.BCM)
+        # GPIO.setup(self.HALL_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        # GPIO.add_event_detect(self.HALL_PIN, GPIO.FALLING, callback=self.inc)
 
         self.spi = SpiDev()
         self.spi.open(0, 0)
         self.spi.max_speed_hz = 20000000
         self.spi.mode = 0
 
-        self.active_gather_event = Event()
-        self.active_gather_event.clear()
+        # self.active_gather_event = Event()
+        # self.active_gather_event.clear()
 
         self.data_queue = data_queue
 
         self.buffer = np.ndarray(shape=(self.buffer_size, 1), dtype=np.uint16)
 
-    def inc(self, channel):
-        if channel == self.HALL_PIN:
-            if self.clk_val < self.NUM_CYCLES:
-                self.clk_val += 1
-                if self.clk_val == 1:
-                    self.active_gather_event.set()
-            else:
-                self.clk_val = 0
-                self.active_gather_event.clear()
+    # def inc(self, channel):
+    #     if channel == self.HALL_PIN:
+    #         if self.clk_val < self.NUM_CYCLES:
+    #             self.clk_val += 1
+    #             if self.clk_val == 1:
+    #                 self.active_gather_event.set()
+    #         else:
+    #             self.clk_val = 0
+    #             self.active_gather_event.clear()
 
     def read_adc(self):
         resp = self.spi.xfer2([0x00, 0x00])
@@ -65,20 +65,52 @@ class CaptureLightIntensity(Process):
         else:
             return 0, 0, 0, 0
 
+    # def run(self) -> None:
+    #
+    #     while not self.shutdown_event.is_set():
+    #
+    #         sample_num = 0
+    #         self.active_gather_event.wait()
+    #         try:
+    #             while self.active_gather_event.is_set():
+    #                 self.buffer[sample_num] = self.read_adc()
+    #                 sample_num += 1
+    #             data = self.process_data(self.NUM_CYCLES, sample_num)
+    #             self.data_queue.put(data)
+    #         except Exception as e:
+    #             print(e)
+
     def run(self) -> None:
 
-        while not self.shutdown_event.is_set():
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(self.HALL_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-            sample_num = 0
-            self.active_gather_event.wait()
-            try:
-                while self.active_gather_event.is_set():
-                    self.buffer[sample_num] = self.read_adc()
-                    sample_num += 1
-                data = self.process_data(self.NUM_CYCLES, sample_num)
-                self.data_queue.put(data)
-            except Exception:
-                pass
+        while not self.shutdown_event.is_set():
+                try:
+
+                    sample_num = 0
+                    clock_val = 0
+                    GPIO.wait_for_edge(self.HALL_PIN, GPIO.RISING)
+                    old_signal = 1
+
+                    while 1:
+
+                        new_signal = GPIO.input(self.HALL_PIN)
+
+                        if not old_signal == new_signal:
+                            old_signal = new_signal
+                            clock_val += 1
+                            if clock_val >= self.NUM_CYCLES:
+                                break
+
+                        self.buffer[sample_num] = self.read_adc()
+                        sample_num += 1
+
+                    data = self.process_data(self.NUM_CYCLES, sample_num)
+                    self.data_queue.put(data)
+
+                except Exception as e:
+                    print(e)
 
     def close(self) -> None:
         self.spi.close()
