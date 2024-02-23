@@ -23,11 +23,12 @@ class CaptureLightIntensity(Process):
 
         self.spi = SpiDev()
         self.spi.open(0, 0)
-        self.spi.max_speed_hz = 15000000
+        self.spi.max_speed_hz = 20000000
         self.spi.mode = 0
 
-        self.active_gather_event = Event()
-        self.active_gather_event.clear()
+        # self.active_gather_event = Event()
+        # self.active_gather_event.clear()
+        self.active_gathering = 0
 
         self.data_queue = data_queue
 
@@ -38,10 +39,12 @@ class CaptureLightIntensity(Process):
             if self.clk_val < self.NUM_CYCLES:
                 self.clk_val += 1
                 if self.clk_val == 1:
-                    self.active_gather_event.set()
+                    # self.active_gather_event.set()
+                    self.active_gathering = 1
             else:
                 self.clk_val = 0
-                self.active_gather_event.clear()
+                # self.active_gather_event.clear()
+                self.active_gathering = 0
 
     def read_adc(self):
         resp = self.spi.xfer2([0x00, 0x00])
@@ -70,9 +73,10 @@ class CaptureLightIntensity(Process):
         while not self.shutdown_event.is_set():
 
             sample_num = 0
-            self.active_gather_event.wait()
+            # self.active_gather_event.wait()
             try:
-                while self.active_gather_event.is_set():
+                # while self.active_gather_event.is_set():
+                while self.active_gathering:
                     self.buffer[sample_num] = self.read_adc()
                     sample_num += 1
                 data = self.process_data(self.NUM_CYCLES, sample_num)
