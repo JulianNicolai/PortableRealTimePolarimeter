@@ -14,7 +14,7 @@ capture_process.start()
 i = 0
 while i < 30:
     data = data_queue.get(block=True)
-    print(f"S0: {data[0]}, S1: {data[1]}, S2: {data[2]}, S3: {data[3]}")
+    print(f"S0: {data[0]}, S1: {data[1]}, S2: {data[2]}, S3: {data[3]}, Samples: {data[4]}")
     i += 1
 
 shutdown_event.set()
