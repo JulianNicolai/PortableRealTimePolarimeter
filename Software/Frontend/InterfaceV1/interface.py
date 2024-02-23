@@ -10,8 +10,7 @@ from interfaceconfig import Configuration
 
 class Interface(QtWidgets.QMainWindow):
 
-    PATH_LINUX = "/home/polarimeter/Documents/PortableRealTimePolarimeter/Software/Frontend/InterfaceV1/gui.ui"
-    PATH_WINDOWS = "gui.ui"
+    PATH_LINUX = "/home/polarimeter/Documents/PortableRealTimePolarimeter/Software/Frontend/InterfaceV1/"
 
     def __init__(self, in_production_flag: bool):
 
@@ -19,14 +18,19 @@ class Interface(QtWidgets.QMainWindow):
 
         self.IN_PRODUCTION = in_production_flag
 
+        GUI_FILENAME = "gui.ui"
+        CONFIG_FILENAME = "config.ini"
+
         if platform == "win32":
             self.linux_flag = False
-            path = self.PATH_WINDOWS
+            gui_path = GUI_FILENAME
+            config_path = CONFIG_FILENAME
         else:
             self.linux_flag = True
-            path = self.PATH_LINUX
+            gui_path = self.PATH_LINUX + GUI_FILENAME
+            config_path = self.PATH_LINUX + CONFIG_FILENAME
 
-        uic.loadUi(path, self)  # Load the .ui file
+        uic.loadUi(gui_path, self)  # Load the .ui file
         self.setFixedSize(self.size())  # Disables window resizing
         self.setWindowTitle("Real-Time Portable Polarimeter")
         self.move(0, 0)  # Move frame to top left of screen
@@ -45,7 +49,7 @@ class Interface(QtWidgets.QMainWindow):
             stream_err.statement.connect(self.error_stream_to_log)
             sys.stderr = stream_err
 
-        self.config = Configuration(self)
+        self.config = Configuration(self, config_path)
 
         self.plotter = InterfacePlotter(self)
 

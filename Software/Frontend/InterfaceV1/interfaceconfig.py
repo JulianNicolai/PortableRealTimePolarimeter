@@ -4,12 +4,12 @@ class Configuration:
 
     MOTOR_MAX_SPEED = 3840  # [RPM]
 
-    def __init__(self, interface):
+    def __init__(self, interface, config_path):
 
         self.interface = interface
 
         self.saved_config = ConfigParser()
-        self.saved_config.read('config.ini')
+        self.saved_config.read(config_path)
 
         try:
             self.motor_speed_percent = int(self.saved_config.get('Capture Settings', 'MOTOR_SPEED_PERCENT'))

@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c8ef2339-a892-40c3-aaa3-5b3910a48587" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CaptureLightIntensity.py" beforeDir="false" afterPath="$PROJECT_DIR$/CaptureLightIntensity.pyx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +44,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1708659970532</updated>
-      <workItem from="1708659972689" duration="5303000" />
+      <workItem from="1708659972689" duration="6607000" />
     </task>
     <servers />
   </component>
