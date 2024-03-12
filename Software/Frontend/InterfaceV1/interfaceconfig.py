@@ -37,11 +37,12 @@ class Configuration:
         self.apply_config()
 
     def update_statistics(self, samples, dt):
-        self.actual_motor_speed = round(self.get_rotations_per_frame() * 60 / (dt * 1e-6))
-        self.samples_per_second = round(samples / dt)
+        dt_in_seconds = dt * 1e-6
+        self.actual_motor_speed = round(self.get_rotations_per_frame() * 60 / dt_in_seconds)
+        self.samples_per_second = round(samples / dt_in_seconds)
         self.samples_per_frame = samples
-        self.integration_time = dt * 1e-3
-        self.frames_per_second = 1 / self.integration_time
+        self.integration_time = dt_in_seconds * 1e3
+        self.frames_per_second = 1 / dt_in_seconds
         self.update_display()
 
     def update_display(self):
