@@ -5,6 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c8ef2339-a892-40c3-aaa3-5b3910a48587" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../Documentation/Poster/main.aux" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Documentation/Poster/main.aux" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Documentation/Poster/main.fdb_latexmk" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Documentation/Poster/main.fdb_latexmk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Documentation/Poster/main.fls" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Documentation/Poster/main.fls" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Documentation/Poster/main.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Documentation/Poster/main.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Documentation/Poster/main.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Documentation/Poster/main.synctex.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Documentation/Poster/main.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Documentation/Poster/main.tex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -15,27 +21,27 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2ckeO9FEzVJBqimqpYRF8xVxkiA" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -45,6 +51,7 @@
       <option name="presentableId" value="Default" />
       <updated>1708659970532</updated>
       <workItem from="1708659972689" duration="6607000" />
+      <workItem from="1709395050960" duration="1811000" />
     </task>
     <servers />
   </component>

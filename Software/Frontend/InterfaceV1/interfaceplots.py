@@ -46,6 +46,9 @@ class InterfacePlotter:
     def generate_random_polarisation(self):
         self.calc.generate_random_polarisation()
 
+    def set_stokes_params(self, S0, S1, S2, S3):
+        self.calc.set_stokes_params(S0, S1, S2, S3)
+
     def update_plots(self):
 
         tab_index = self.interface.tab_widget.currentIndex()

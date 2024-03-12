@@ -3,7 +3,7 @@ close all
 % clear all
 RPM = 3840;  % [RPM] max
 cycles_per_sec = RPM / 60;  % [Hz]
-samples_per_sec = 100e3;  % Samples per second
+samples_per_sec = 166e3;  % Samples per second
 cycles = 5; % Number of cycles
 
 samples_per_cycle = samples_per_sec / cycles_per_sec;  % Samples per cycle

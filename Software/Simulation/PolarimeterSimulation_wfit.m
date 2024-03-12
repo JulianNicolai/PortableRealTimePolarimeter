@@ -155,27 +155,23 @@ S0_calc = 2*A0 - S1_calc/2;
 % plot(yscaledabs)
 % xlim([0, w2+15])
 
-% fs = 1/Ts;
-% freq = (0:length(yscaledabs)-1)*fs/length(yscaledabs);
-% fshift = (-samples/2 : samples/2-1)*(fs/samples);
+fs = 1/Ts;
+freq = (0:length(yscaledabs)-1)*fs/length(yscaledabs);
+fshift = (-samples/2 : samples/2-1)*(fs/samples);
 
-% fig = figure;
-% plot(freq, yscaledabs)
-% xlim([0, freq(w2+15)])
-% ylim([0, 1])
-% xlabel('Frequency (Hz)')
-% ylabel('Normalised Voltage (a.u.)')
-% title('Normalised Voltage From ADC vs Frequency', "With Gasussian Noise of SNR = " + int2str(SNR) + " dB")
-% annotation(fig,'textbox', [0.664285714285712 0.401357155913399 0.212499994199191 0.461904748848507],'String',...
-%     ["S0_{real} = " + num2str(S0, '%5.4f'), ...
-%     "S0_{calc} = " + num2str(S0_calc, '%5.4f'), ...
-%     "S1_{real} = " + num2str(S1, '%5.4f'), ...
-%     "S1_{calc} = " + num2str(S1_calc, '%5.4f'), ...
-%     "S2_{real} = " + num2str(S2, '%5.4f'), ...
-%     "S2_{calc} = " + num2str(S2_calc, '%5.4f'), ...
-%     "S3_{real} = " + num2str(S3, '%5.4f'), ...
-%     "S3_{calc} = " + num2str(S3_calc, '%5.4f')], 'FitBoxToText', 'on', 'BackgroundColor',[1 1 1]);
-% grid on
+fig = figure;
+plot(freq, yscaledabs)
+xlim([0, freq(round(w2)+15)])
+ylim([0, 1])
+xlabel('Frequency (Hz)')
+ylabel('Normalised Voltage (a.u.)')
+title('Normalised Voltage From ADC vs Frequency', "With Gasussian Noise of SNR = " + int2str(SNR) + " dB")
+annotation(fig,'textbox', [0.664285714285712 0.401357155913399 0.212499994199191 0.461904748848507],'String',...
+    ["S0_{real} = " + num2str(S0, '%5.4f') + " | S0_{calc} = " + num2str(S0_calc, '%5.4f'), ...
+    "S1_{real} = " + num2str(S1, '%5.4f') + " | S1_{calc} = " + num2str(S1_calc, '%5.4f'), ...
+    "S2_{real} = " + num2str(S2, '%5.4f') + " | S2_{calc} = " + num2str(S2_calc, '%5.4f'), ...
+    "S3_{real} = " + num2str(S3, '%5.4f') + " | S3_{calc} = " + num2str(S3_calc, '%5.4f')], 'FitBoxToText', 'on', 'BackgroundColor',[1 1 1]);
+grid on
 
 % pause
 % clf

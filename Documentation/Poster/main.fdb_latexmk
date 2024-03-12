@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex main"] 1708566373 "main.aux" "main.bbl" "main" 1708566827
+["bibtex main"] 1709572797 "main.aux" "main.bbl" "main" 1709572804
   "C:/Users/Julian Nicolai/AppData/Local/Programs/MiKTeX 2.9/bibtex/bst/bibtex/unsrt.bst" 1291864736 18030 1376b4b231b50c66211e47e42eda2875 ""
-  "main.aux" 1708566826 1774 5407468e1ec77202acf6ee43c6de0267 "pdflatex"
+  "main.aux" 1709572803 1776 d5ad452c8c13b005076f276beb9c2f70 "pdflatex"
   "sample.bib" 1665129365 2453 eb0685f196f3af297c8e3935dd62e0db ""
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1708566821 "c:/Users/Julian Nicolai/Desktop/Conference Poster/main.tex" "main.pdf" "main" 1708566827
+["pdflatex"] 1709572798 "c:/Users/Julian Nicolai/Documents/Personal Documents/School/Current Term/ELEC 4907/PortableRealTimePolarimeter/Documentation/Poster/main.tex" "main.pdf" "main" 1709572804
   "C:/Users/Julian Nicolai/AppData/Local/MiKTeX/2.9/fonts/map/pdftex/pdftex.map" 1708293853 186265 5272bd0c36ce79146be07016ba065f38 ""
   "C:/Users/Julian Nicolai/AppData/Local/MiKTeX/2.9/miktex/data/le/pdftex/pdflatex.fmt" 1649915213 10254360 f1dca6f2395160c52eb80da866dd71e0 ""
   "C:/Users/Julian Nicolai/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc" 1458470287 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -272,12 +272,12 @@
   "Images/sri_spectrum_v2_LQ.png" 1665031140 95202 b5c07de60eac9b22b7aa6b875b437b51 ""
   "beamerposter.sty" 1664757420 7902 434c82aacae3201af7b79f0c89f17d05 ""
   "beamerthemeconfposter.sty" 1708565380 13197 3917856de9563f10c01e56f0d018f9d3 ""
-  "c:/Users/Julian Nicolai/Desktop/Conference Poster/main.tex" 1708566820 13309 4fbbded37a10f11ec6fdda5e1c7c839c ""
-  "main.aux" 1708566826 1774 5407468e1ec77202acf6ee43c6de0267 "pdflatex"
-  "main.bbl" 1708566373 514 a26d2f2947ffe3cc3d467a663cefa29e "bibtex main"
-  "main.nav" 1708566826 307 9e520c26371a1250ff9fc1fe87f9c655 "pdflatex"
+  "c:/Users/Julian Nicolai/Documents/Personal Documents/School/Current Term/ELEC 4907/PortableRealTimePolarimeter/Documentation/Poster/main.tex" 1709572788 13309 de4a539a846e21d4ac17ba7b6fb10e1a ""
+  "main.aux" 1709572803 1776 d5ad452c8c13b005076f276beb9c2f70 "pdflatex"
+  "main.bbl" 1709572798 514 a26d2f2947ffe3cc3d467a663cefa29e "bibtex main"
+  "main.nav" 1709572803 307 9e520c26371a1250ff9fc1fe87f9c655 "pdflatex"
   "main.out" 0 -1 0 "pdflatex"
-  "main.tex" 1708566820 13309 4fbbded37a10f11ec6fdda5e1c7c839c ""
+  "main.tex" 1709572788 13309 de4a539a846e21d4ac17ba7b6fb10e1a ""
   (generated)
   "main.aux"
   "main.log"

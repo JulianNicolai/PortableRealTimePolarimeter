@@ -1,15 +1,17 @@
 import sys
 from datetime import datetime
+from typing import Tuple
+
 from PyQt5 import QtWidgets, QtCore, uic
-from PyQt5.QtCore import QTimer
+from PyQt5.QtCore import QTimer, QThread, pyqtSlot
 from emittingstream import EmittingStream
 from interfaceplots import InterfacePlotter
 from sys import platform
 from interfaceconfig import Configuration
+from serialreceiver import SerialReceiver
 
 
 class Interface(QtWidgets.QMainWindow):
-
     PATH_LINUX = "/home/polarimeter/Documents/PortableRealTimePolarimeter/Software/Frontend/InterfaceV1/"
 
     def __init__(self, in_production_flag: bool):
@@ -55,11 +57,19 @@ class Interface(QtWidgets.QMainWindow):
 
         self.establish_button_connections()
 
+        self.serial_receiver_worker = SerialReceiver()
+        self.serial_receiver_thread = QThread()
+        self.serial_receiver_worker.moveToThread(self.serial_receiver_thread)
+        self.serial_receiver_thread.started.connect(self.serial_receiver_worker.listen)
+        self.serial_receiver_worker.signal.connect(self.data_recv)
+        self.serial_receiver_thread.start()
+
         print("System initialized. Ready to begin measurement.")
 
     def system_control(self):
         if self.start_stop_button.isChecked():
             self.start_stop_button.setEnabled(False)
+            # TODO: Implement motor turn on over SPI
             QTimer.singleShot(1000, lambda: self.start_stop_button.setDisabled(False))
             print("System started!")
         else:
@@ -69,16 +79,21 @@ class Interface(QtWidgets.QMainWindow):
         self.plotter.generate_random_polarisation()
         self.plotter.update_plots()
 
+    @pyqtSlot(tuple)
+    def data_recv(self, data: Tuple[int, int, float, float, float, float]):
+        samples, dt, S0, S1, S2, S3 = data
+        self.config.update_statistics(samples, dt)
+        self.plotter.set_stokes_params(S0, S1, S2, S3)
+        self.plotter.update_plots()
+        print(f"Data received: {data}")
+
     def change_config_value(self, value):
         if self.motor_speed_button.isChecked():
             new_value = self.motor_speed_value.value() + value
             self.config.update_motor_speed_percent(new_value)
-        elif self.rotations_frame_button.isChecked():
+        else:
             new_value = self.rotations_frame_value.value() + value
             self.config.update_rotations_per_frame(new_value)
-        else:
-            new_value = self.samples_rotation_value.value() + value
-            self.config.update_samples_per_rotation(new_value)
 
     def save_log(self):
         timestamp = self.generate_timestamp(1)

@@ -1,6 +1,6 @@
-PWD c:\Users\Julian Nicolai\Desktop\Conference Poster
+PWD c:\Users\Julian Nicolai\Documents\Personal Documents\School\Current Term\ELEC 4907\PortableRealTimePolarimeter\Documentation\Poster
 INPUT C:\Users\Julian Nicolai\AppData\Local\MiKTeX\2.9\miktex\data\le\pdftex\pdflatex.fmt
-INPUT c:\Users\Julian Nicolai\Desktop\Conference Poster\main.tex
+INPUT c:\Users\Julian Nicolai\Documents\Personal Documents\School\Current Term\ELEC 4907\PortableRealTimePolarimeter\Documentation\Poster\main.tex
 OUTPUT main.log
 INPUT C:\Users\Julian Nicolai\AppData\Local\Programs\MiKTeX 2.9\tex\latex\beamer\beamer.cls
 INPUT C:\Users\Julian Nicolai\AppData\Local\Programs\MiKTeX 2.9\tex\latex\beamer\beamer.cls

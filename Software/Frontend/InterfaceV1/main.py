@@ -5,7 +5,7 @@ from interface import Interface
 
 class Main:
 
-    IN_PRODUCTION = False
+    IN_PRODUCTION = True
 
     def __init__(self, argv):
         app = QtWidgets.QApplication(argv)

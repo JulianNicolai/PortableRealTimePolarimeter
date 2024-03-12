@@ -43,6 +43,12 @@ class PolarisationStateTracker:
 
         print("New random state generated.")
 
+    def set_stokes_params(self, S0, S1, S2, S3):
+        self.S0 = S0
+        self.S1 = S1
+        self.S2 = S2
+        self.S3 = S3
+
     def get_stokes_params(self):
         return [self.S0, self.S1, self.S2, self.S3]
 

@@ -1059,47 +1059,13 @@
           </property>
           <layout class="QFormLayout" name="formLayout_5">
            <item row="0" column="0">
-            <widget class="QLabel" name="motor_speed_set_label">
-             <property name="text">
-              <string>Set Motor Speed: </string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QSpinBox" name="motor_speed_set_value">
-             <property name="font">
-              <font>
-               <family>Consolas</family>
-              </font>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="suffix">
-              <string> RPM</string>
-             </property>
-             <property name="maximum">
-              <number>9999</number>
-             </property>
-             <property name="value">
-              <number>3648</number>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
             <widget class="QLabel" name="motor_speed_status_label">
              <property name="text">
               <string>Actual Motor Speed: </string>
              </property>
             </widget>
            </item>
-           <item row="1" column="1">
+           <item row="0" column="1">
             <widget class="QSpinBox" name="motor_speed_status_value">
              <property name="font">
               <font>
@@ -1126,14 +1092,14 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="0">
+           <item row="1" column="0">
             <widget class="QLabel" name="samples_frame_label">
              <property name="text">
               <string>Samples/Frame:</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="1">
+           <item row="1" column="1">
             <widget class="QSpinBox" name="samples_frame_value">
              <property name="font">
               <font>
@@ -1160,14 +1126,14 @@
              </property>
             </widget>
            </item>
-           <item row="3" column="0">
+           <item row="2" column="0">
             <widget class="QLabel" name="fps_label">
              <property name="text">
               <string>Frames/Second:</string>
              </property>
             </widget>
            </item>
-           <item row="3" column="1">
+           <item row="2" column="1">
             <widget class="QDoubleSpinBox" name="fps_value">
              <property name="font">
               <font>
@@ -1188,14 +1154,14 @@
              </property>
             </widget>
            </item>
-           <item row="4" column="0">
+           <item row="3" column="0">
             <widget class="QLabel" name="integration_time_label">
              <property name="text">
               <string>Integration Time:</string>
              </property>
             </widget>
            </item>
-           <item row="4" column="1">
+           <item row="3" column="1">
             <widget class="QDoubleSpinBox" name="integration_time_value">
              <property name="font">
               <font>
@@ -1222,14 +1188,14 @@
              </property>
             </widget>
            </item>
-           <item row="5" column="0">
+           <item row="4" column="0">
             <widget class="QLabel" name="samples_second_label">
              <property name="text">
               <string>Samples/Second:</string>
              </property>
             </widget>
            </item>
-           <item row="5" column="1">
+           <item row="4" column="1">
             <widget class="QSpinBox" name="samples_second_value">
              <property name="font">
               <font>
@@ -1271,166 +1237,7 @@
            <string>Measurement</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_7">
-           <item row="1" column="1">
-            <widget class="QSpinBox" name="rotations_frame_value">
-             <property name="minimumSize">
-              <size>
-               <width>121</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>Consolas</family>
-              </font>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="minimum">
-              <number>1</number>
-             </property>
-             <property name="maximum">
-              <number>20</number>
-             </property>
-             <property name="value">
-              <number>5</number>
-             </property>
-            </widget>
-           </item>
            <item row="2" column="1">
-            <widget class="QSpinBox" name="samples_rotation_value">
-             <property name="minimumSize">
-              <size>
-               <width>121</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>Consolas</family>
-              </font>
-             </property>
-             <property name="layoutDirection">
-              <enum>Qt::LeftToRight</enum>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="minimum">
-              <number>20</number>
-             </property>
-             <property name="maximum">
-              <number>99999999</number>
-             </property>
-             <property name="value">
-              <number>1562</number>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="rotations_frame_label">
-             <property name="text">
-              <string>Rotations/Frame: </string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="samples_rotation_label">
-             <property name="text">
-              <string>Samples/Rotation:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QSpinBox" name="motor_speed_value">
-             <property name="minimumSize">
-              <size>
-               <width>121</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>Consolas</family>
-              </font>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="buttonSymbols">
-              <enum>QAbstractSpinBox::NoButtons</enum>
-             </property>
-             <property name="suffix">
-              <string>%</string>
-             </property>
-             <property name="minimum">
-              <number>1</number>
-             </property>
-             <property name="maximum">
-              <number>100</number>
-             </property>
-             <property name="value">
-              <number>95</number>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="motor_speed_label">
-             <property name="text">
-              <string>Motor Speed:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="2">
-            <widget class="QRadioButton" name="samples_rotation_button">
-             <property name="text">
-              <string/>
-             </property>
-             <attribute name="buttonGroup">
-              <string notr="true">measurement_parameter_selection_group</string>
-             </attribute>
-            </widget>
-           </item>
-           <item row="1" column="2">
-            <widget class="QRadioButton" name="rotations_frame_button">
-             <property name="text">
-              <string/>
-             </property>
-             <attribute name="buttonGroup">
-              <string notr="true">measurement_parameter_selection_group</string>
-             </attribute>
-            </widget>
-           </item>
-           <item row="0" column="2">
-            <widget class="QRadioButton" name="motor_speed_button">
-             <property name="text">
-              <string/>
-             </property>
-             <property name="checked">
-              <bool>true</bool>
-             </property>
-             <attribute name="buttonGroup">
-              <string notr="true">measurement_parameter_selection_group</string>
-             </attribute>
-            </widget>
-           </item>
-           <item row="3" column="1">
             <widget class="QWidget" name="samples_rotation_input" native="true">
              <property name="minimumSize">
               <size>
@@ -1619,6 +1426,112 @@
                <string>Reset</string>
               </property>
              </widget>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QSpinBox" name="rotations_frame_value">
+             <property name="minimumSize">
+              <size>
+               <width>121</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>Consolas</family>
+              </font>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="minimum">
+              <number>1</number>
+             </property>
+             <property name="maximum">
+              <number>20</number>
+             </property>
+             <property name="value">
+              <number>5</number>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="motor_speed_label">
+             <property name="text">
+              <string>Motor Speed:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QSpinBox" name="motor_speed_value">
+             <property name="minimumSize">
+              <size>
+               <width>121</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>Consolas</family>
+              </font>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="suffix">
+              <string>%</string>
+             </property>
+             <property name="minimum">
+              <number>1</number>
+             </property>
+             <property name="maximum">
+              <number>100</number>
+             </property>
+             <property name="value">
+              <number>95</number>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="rotations_frame_label">
+             <property name="text">
+              <string>Rotations/Frame: </string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QRadioButton" name="motor_speed_button">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">measurement_parameter_selection_group</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QRadioButton" name="rotations_frame_button">
+             <property name="text">
+              <string/>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">measurement_parameter_selection_group</string>
+             </attribute>
             </widget>
            </item>
           </layout>
