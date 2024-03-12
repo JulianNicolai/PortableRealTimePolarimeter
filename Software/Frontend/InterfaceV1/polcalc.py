@@ -70,11 +70,12 @@ class PolarisationStateTracker:
     def get_polarisation_ellipse_xy_data(self):
 
         psi, chi = self.get_polarisation_ellipse_params()
+        DOP = self.get_dop()
 
         sin_t = sin(self.t)
         cos_t = cos(self.t)
 
-        x_t = np.sqrt(self.S0) * (cos(chi) * cos(psi) * sin_t - sin(chi) * sin(psi) * cos_t)
-        y_t = np.sqrt(self.S0) * (cos(chi) * sin(psi) * sin_t + sin(chi) * cos(psi) * cos_t)
+        x_t = (np.sqrt(self.S0) * (cos(chi) * cos(psi) * sin_t - sin(chi) * sin(psi) * cos_t)) * DOP
+        y_t = (np.sqrt(self.S0) * (cos(chi) * sin(psi) * sin_t + sin(chi) * cos(psi) * cos_t)) * DOP
 
         return x_t, y_t
