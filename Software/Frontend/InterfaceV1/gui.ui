@@ -1061,7 +1061,7 @@
            <item row="0" column="0">
             <widget class="QLabel" name="motor_speed_status_label">
              <property name="text">
-              <string>Actual Motor Speed: </string>
+              <string>Motor Speed: </string>
              </property>
             </widget>
            </item>
