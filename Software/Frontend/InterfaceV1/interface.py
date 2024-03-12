@@ -85,7 +85,7 @@ class Interface(QtWidgets.QMainWindow):
         self.config.update_statistics(samples, dt)
         self.plotter.set_stokes_params(S0, S1, S2, S3)
         self.plotter.update_plots()
-        print(f"Data received: {data}")
+        # print(f"Data received: {data}")
 
     def change_config_value(self, value):
         if self.motor_speed_button.isChecked():
