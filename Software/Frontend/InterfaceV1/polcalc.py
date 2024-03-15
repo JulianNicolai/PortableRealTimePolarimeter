@@ -53,12 +53,25 @@ class PolarisationStateTracker:
         return [self.S0, self.S1, self.S2, self.S3]
 
     def get_dop(self):
+
+        if self.S0 == 0:
+            return 0
+
         return np.sqrt(self.S1 ** 2 + self.S2 ** 2 + self.S3 ** 2) / self.S0
 
     def get_polarisation_ellipse_params(self):
-        K = 0 if self.S1 >= 0 else np.pi / 2
-        psi = math.atan(self.S2 / self.S1) / 2 - K
-        chi = math.asin(self.S3 / self.S0) / 2
+
+        if self.S1 == 0:
+            psi = np.pi / 4
+        else:
+            K = 0 if self.S1 >= 0 else np.pi / 2
+            psi = math.atan(self.S2 / self.S1) / 2 - K
+
+        if self.S0 == 0:
+            chi = 0
+        else:
+            chi = math.asin(self.S3 / self.S0) / 2
+
         return psi, chi
 
     def get_poincare_sphere_params(self):
