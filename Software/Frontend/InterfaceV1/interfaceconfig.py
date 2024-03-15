@@ -1,6 +1,7 @@
 from configparser import ConfigParser
 from tiagaincontrol import TIAGainControl
 
+
 class Configuration:
 
     MOTOR_MAX_SPEED = 4680  # [RPM]
@@ -116,9 +117,11 @@ class Configuration:
     def reset(self):
         self.motor_speed_percent_temp = self.motor_speed_percent
         self.rotations_per_frame_temp = self.rotations_per_frame
+        self.tia_gain_temp = self.tia_gain
 
         self.interface.motor_speed_value.setValue(self.motor_speed_percent_temp)
         self.interface.rotations_frame_value.setValue(self.rotations_per_frame_temp)
+        self.interface.gain_value.setValue(self.tia_gain_temp)
 
         self.applied = True
         self.changes_made()
