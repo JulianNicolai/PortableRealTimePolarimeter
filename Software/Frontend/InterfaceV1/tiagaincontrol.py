@@ -26,8 +26,8 @@ class TIAGainControl:
         command_byte = self.address_word | self.read_word
         data_byte = 0xFF
         value = self.spi.xfer([command_byte, data_byte])
-        if value & 512 == 512:
-            return value & 255
+        if value[0] & 2 == 2:
+            return value[1] & 255
 
     def display_resistance(self, value):
         # Calculate the resistance based on the wiper position
