@@ -1572,6 +1572,9 @@
              <property name="text">
               <string/>
              </property>
+             <attribute name="buttonGroup">
+              <string notr="true">measurement_parameter_selection_group</string>
+             </attribute>
             </widget>
            </item>
            <item row="2" column="0">
