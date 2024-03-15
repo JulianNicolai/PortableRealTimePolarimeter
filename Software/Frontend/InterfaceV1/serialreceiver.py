@@ -14,14 +14,14 @@ class SerialReceiver(QObject):
 
     def __init__(
             self,
+            serial_object,
             *args,
             **kwargs
     ) -> None:
         super(SerialReceiver, self).__init__(*args, **kwargs)
-        self.ser = serial.Serial('/dev/ttyS0', baudrate=115200, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE,
-                        bytesize=serial.EIGHTBITS, timeout=10)
-        # self.ser = serial.Serial('COM1', baudrate=115200, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE,
-        #                 bytesize=serial.EIGHTBITS, timeout=10)
+        self.ser = serial_object
+
+        print("Listening for serial data from RPi Pico.")
 
     def listen(self) -> None:
 

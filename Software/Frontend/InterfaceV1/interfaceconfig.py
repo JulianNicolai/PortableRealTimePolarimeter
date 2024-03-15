@@ -1,12 +1,14 @@
 from configparser import ConfigParser
+from tiagaincontrol import TIAGainControl
 
 class Configuration:
 
     MOTOR_MAX_SPEED = 4680  # [RPM]
 
-    def __init__(self, interface, config_path):
+    def __init__(self, interface, config_path, serial_device):
 
         self.interface = interface
+        self.serial_device = serial_device
 
         self.saved_config = ConfigParser()
         self.saved_config.read(config_path)
@@ -14,6 +16,7 @@ class Configuration:
         try:
             self.motor_speed_percent = int(self.saved_config.get('Capture Settings', 'MOTOR_SPEED_PERCENT'))
             self.rotations_per_frame = int(self.saved_config.get('Capture Settings', 'ROTATIONS_PER_FRAME'))
+            self.tia_gain = int(self.saved_config.get('Capture Settings', 'TIA_GAIN'))
         except ValueError:
             print("Configuration error! One or more configuration values contain non-numeric characters or non-integer "
                   "values (floats are invalid). Verify the config is correct or save the configuration through the "
@@ -30,6 +33,10 @@ class Configuration:
 
         self.motor_speed_percent_temp = None
         self.rotations_per_frame_temp = None
+        self.tia_gain_temp = None
+
+        self.tia_dig_rheostat = TIAGainControl()
+        self.tia_dig_rheostat.write_value(self.tia_gain)
 
         self.applied = True
 
@@ -64,9 +71,19 @@ class Configuration:
         self.applied = False
         self.changes_made()
 
+    def update_tia_gain(self, tia_gain):
+        self.interface.gain_value.setValue(tia_gain)
+        self.tia_gain_temp = tia_gain
+        self.applied = False
+        self.changes_made()
+
     def apply_config(self):
         self.motor_speed_percent = self.motor_speed_percent_temp
         self.rotations_per_frame = self.rotations_per_frame_temp
+        self.tia_gain = self.tia_gain_temp
+
+        self.tia_dig_rheostat.write_value(self.tia_gain)
+        self.serial_device.write(b'c' + int.to_bytes(self.rotations_per_frame))
 
         # TODO: Add command to update RPi Pico -> b'c' + self.rotations_per_frame.to_bytes(1)
 
@@ -75,7 +92,8 @@ class Configuration:
 
         print(f"Applied current configuration parameters successfully. "
               f"Motor Speed: {self.motor_speed_percent}%  "
-              f"Rotations/Frame: {self.rotations_per_frame}  ")
+              f"Rotations/Frame: {self.rotations_per_frame}  "
+              f"TIA Gain: {self.tia_gain}")
 
     def save_config(self):
 

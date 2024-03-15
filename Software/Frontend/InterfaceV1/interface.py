@@ -9,6 +9,7 @@ from interfaceplots import InterfacePlotter
 from sys import platform
 from interfaceconfig import Configuration
 from serialreceiver import SerialReceiver
+import serial
 
 
 class Interface(QtWidgets.QMainWindow):
@@ -27,10 +28,13 @@ class Interface(QtWidgets.QMainWindow):
             self.linux_flag = False
             gui_path = GUI_FILENAME
             config_path = CONFIG_FILENAME
+            serial_device_name = 'COM1'
+
         else:
             self.linux_flag = True
             gui_path = self.PATH_LINUX + GUI_FILENAME
             config_path = self.PATH_LINUX + CONFIG_FILENAME
+            serial_device_name = '/dev/ttyS0'
 
         uic.loadUi(gui_path, self)  # Load the .ui file
         self.setFixedSize(self.size())  # Disables window resizing
@@ -51,13 +55,16 @@ class Interface(QtWidgets.QMainWindow):
             stream_err.statement.connect(self.error_stream_to_log)
             sys.stderr = stream_err
 
-        self.config = Configuration(self, config_path)
+        self.serial_device = serial.Serial(serial_device_name, baudrate=115200, parity=serial.PARITY_NONE,
+                                 stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS, timeout=10)
+
+        self.config = Configuration(self, config_path, self.serial_device)
 
         self.plotter = InterfacePlotter(self)
 
         self.establish_button_connections()
 
-        self.serial_receiver_worker = SerialReceiver()
+        self.serial_receiver_worker = SerialReceiver(self.serial_device)
         self.serial_receiver_thread = QThread()
         self.serial_receiver_worker.moveToThread(self.serial_receiver_thread)
         self.serial_receiver_thread.started.connect(self.serial_receiver_worker.listen)
@@ -91,10 +98,12 @@ class Interface(QtWidgets.QMainWindow):
         if self.motor_speed_button.isChecked():
             new_value = self.motor_speed_value.value() + value
             self.config.update_motor_speed_percent(new_value)
-        else:
+        elif self.rotations_frame_button.isChecked():
             new_value = self.rotations_frame_value.value() + value
             self.config.update_rotations_per_frame(new_value)
-
+        else:
+            new_value = self.gain_value.value() + value
+            self.config.update_tia_gain(new_value)
     def save_log(self):
         timestamp = self.generate_timestamp(1)
         filename = f"logs/log-{timestamp}.txt"
